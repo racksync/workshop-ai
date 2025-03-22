@@ -1,5 +1,7 @@
 # AI Workshop: LLM Automate Course
 
+![Modern AI Overview Header](assets/images/modern-ai-header.jpg)
+
 ## 📚 Course Overview
 
 **Video Conference (Live & Record)**
