@@ -1,0 +1,46 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: always
+    volumes:
+      - open-webui-data:/app/backend/data
+    environment:
+      - OLLAMA_API_BASE_URL=http://ollama:11434/api
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-} # ถ้ามี
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-} # ถ้ามี
+      - PORT=8080
+      - HOST=0.0.0.0
+    ports:
+      - "3000:8080"
+    depends_on:
+      - ollama
+    networks:
+      - ai-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: always
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+    # สำหรับผู้ใช้ GPU NVIDIA เปิดใช้งานส่วนนี้
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
+    driver: bridge
+
+volumes:
+  open-webui-data:
+  ollama-data:
