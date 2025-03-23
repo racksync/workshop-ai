@@ -5,6 +5,10 @@
 
 ## ภาพรวมเทคโนโลยี AI ปัจจุบัน
 
+<div class="text-center">
+  <img src="../assets/images/ai-landscape-2024.jpg" alt="AI Landscape 2024" width="800" />
+</div>
+
 ### AI ยุคปัจจุบัน: ความก้าวหน้าและความสำคัญ
 
 ในช่วงไม่กี่ปีที่ผ่านมา เทคโนโลยี AI ได้ก้าวหน้าอย่างก้าวกระโดด โดยเฉพาะในด้าน Natural Language Processing (NLP) และ Computer Vision ปัจจัยสำคัญที่ทำให้ AI กำลังเป็นที่สนใจอย่างมากในปัจจุบัน ได้แก่:
@@ -55,6 +59,21 @@ LLM ที่มีชื่อเสียง ได้แก่:
 
 ### กระบวนการทำงานของ LLMs
 
+```mermaid
+flowchart LR
+    A[ข้อมูลขนาดใหญ่] --> B[Pre-training]
+    B --> C[Base Model]
+    C --> D[Fine-tuning]
+    D --> E[Specialized Model]
+    E --> F[RLHF]
+    F --> G[Production Model]
+    G --> H{การใช้งาน}
+    H --> I[Chatbot]
+    H --> J[Content Creation]
+    H --> K[Code Generation]
+    H --> L[Data Analysis]
+```
+
 1. **Pre-training**: ฝึกฝนโมเดลด้วยข้อมูลขนาดใหญ่เพื่อให้เข้าใจภาษาในระดับพื้นฐาน
 2. **Fine-tuning**: ปรับแต่งโมเดลให้เหมาะกับงานหรือโดเมนเฉพาะ
 3. **RLHF (Reinforcement Learning from Human Feedback)**: ปรับปรุงโมเดลจากข้อเสนอแนะของมนุษย์เพื่อให้ผลลัพธ์มีคุณภาพ ปลอดภัย และมีประโยชน์มากขึ้น
@@ -74,6 +93,15 @@ LLM ที่มีชื่อเสียง ได้แก่:
 - **Personalized Education** - ปรับเนื้อหาการเรียนรู้ให้เหมาะกับผู้เรียนแต่ละคน
 
 ## ประโยชน์และข้อจำกัดของ AI
+
+```mermaid
+pie
+    title "ข้อจำกัดของ AI ที่ต้องระวัง"
+    "Hallucination" : 35
+    "อคติ (Bias)" : 25
+    "ปัญหาความปลอดภัย" : 25
+    "ขีดจำกัดความสามารถ" : 15
+```
 
 ### ประโยชน์
 - **เพิ่มประสิทธิภาพ (Productivity)** - ช่วยให้ทำงานได้เร็วขึ้น ลดเวลาในการทำงานซ้ำๆ
