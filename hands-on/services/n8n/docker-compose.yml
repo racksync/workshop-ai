@@ -1,0 +1,34 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: always
+    # Bind n8n only on the internal Docker interface.
+    # If you only need to access n8n via Kong, you can
+    # even remove this port mapping or restrict it to localhost
+    ports:
+      - "5678:5678"
+    # All Traefik-related labels removed.
+    # You can keep environment variables for your domain, etc.
+    environment:
+      - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      - N8N_PORT=5678
+      #- N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+    networks:
+      - ai-network
+    # network host
+    #network_mode: host
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+    external: true
+
+networks:
+  ai-network:
+    driver: bridge
+
