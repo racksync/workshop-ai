@@ -56,64 +56,48 @@ graph LR
 #### สร้างไฟล์ docker-compose.yml:
 
 ```yaml
-version: '3.8'
-
 services:
   n8n:
-    image: n8nio/n8n:latest
+    image: n8nio/n8n
     container_name: n8n
     restart: always
+    # Bind n8n only on the internal Docker interface.
+    # If you only need to access n8n via Kong, you can
+    # even remove this port mapping or restrict it to localhost
     ports:
       - "5678:5678"
+    # All Traefik-related labels removed.
+    # You can keep environment variables for your domain, etc.
     environment:
-      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
       - N8N_PORT=5678
-      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      #- N8N_PROTOCOL=https
       - NODE_ENV=production
-      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-your-secret-key}
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n
-      - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
-      - WEBHOOK_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:5678/
-    volumes:
-      - n8n_data:/home/node/.n8n
-    depends_on:
-      - postgres
+      - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
     networks:
-      - n8n-network
-
-  postgres:
-    image: postgres:14
-    container_name: n8n-postgres
-    restart: always
-    environment:
-      - POSTGRES_DB=n8n
-      - POSTGRES_USER=n8n
-      - POSTGRES_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
+      - ai-network
+    # network host
+    #network_mode: host
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - n8n-network
+      - ./n8n_data:/home/node/.n8n
 
 volumes:
   n8n_data:
-  postgres_data:
+    external: true
 
 networks:
-  n8n-network:
+  ai-network:
     driver: bridge
 ```
 
-#### สร้างไฟล์ .env (ไม่จำเป็น แต่แนะนำให้ใช้เพื่อความปลอดภัย):
+#### สร้างไฟล์ .env (เพื่อความปลอดภัย):
 
 ```
-N8N_HOST=localhost
-N8N_PROTOCOL=http
-N8N_ENCRYPTION_KEY=your-secure-encryption-key
-DB_POSTGRESDB_PASSWORD=your-secure-db-password
+DOMAIN_NAME=example.com
+SUBDOMAIN=n8n
+GENERIC_TIMEZONE=Asia/Bangkok
+SSL_EMAIL=email@example.com
 ```
 
 #### เริ่มการทำงาน:
