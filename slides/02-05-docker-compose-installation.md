@@ -3,7 +3,6 @@
 ![docker compose](https://www.google.com/search?q=docker+compose+containers&tbm=isch)
 
 ```yaml
-version: '3.8'
 services:
   n8n:
     image: n8nio/n8n:latest

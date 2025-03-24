@@ -79,8 +79,6 @@ RAG (Retrieval-Augmented Generation) เป็นเทคนิคที่ผ�
 4. PostgreSQL - ฐานข้อมูลสำหรับเก็บข้อมูลการทำงานของ n8n
 
 ```yaml
-version: '3.8'
-
 services:
   n8n:
     image: n8nio/n8n:latest
@@ -108,7 +106,7 @@ services:
       - chroma
       - minio
     networks:
-      - rag-network
+      - ai-network
 
   postgres:
     image: postgres:14
@@ -121,7 +119,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - rag-network
+      - ai-network
       
   chroma:
     image: chromadb/chroma:latest
@@ -132,7 +130,7 @@ services:
     ports:
       - "8000:8000"
     networks:
-      - rag-network
+      - ai-network
       
   minio:
     image: minio/minio:latest
@@ -148,7 +146,7 @@ services:
     volumes:
       - minio_data:/data
     networks:
-      - rag-network
+      - ai-network
 
 volumes:
   n8n_data:
@@ -157,7 +155,7 @@ volumes:
   minio_data:
 
 networks:
-  rag-network:
+  ai-network:
     driver: bridge
 ```
 

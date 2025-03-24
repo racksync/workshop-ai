@@ -82,8 +82,6 @@ graph TD
 ให้สร้างไฟล์ `docker-compose.yml` ด้วยเนื้อหาดังนี้:
 
 ```yaml
-version: '3.8'
-
 services:
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
@@ -687,8 +685,6 @@ cd ai-assistant
 สร้างไฟล์ docker-compose.yml:
 
 ```yaml
-version: '3.8'
-
 services:
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest

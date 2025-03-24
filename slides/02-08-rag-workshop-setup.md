@@ -5,7 +5,6 @@
 ## การติดตั้ง n8n พร้อม Vector Database สำหรับระบบ RAG
 
 ```yaml
-version: '3.8'
 services:
   n8n:
     image: n8nio/n8n:latest
