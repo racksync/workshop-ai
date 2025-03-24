@@ -15,12 +15,12 @@ services:
       - N8N_PORT=5678
       #- N8N_PROTOCOL=https
       - NODE_ENV=production
-      - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      #- WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      - WEBHOOK_URL=http://localhost:5678
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
     networks:
       - ai-network
-    # network host
-    #network_mode: host
+    network_mode: host
     volumes:
       - ./n8n_data:/home/node/.n8n
 
