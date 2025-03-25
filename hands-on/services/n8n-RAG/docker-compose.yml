@@ -32,7 +32,7 @@ services:
       - ai-network
 
   postgres:
-    image: postgres:14
+    image: postgres:latest
     container_name: n8n-postgres
     restart: always
     environment:
@@ -41,7 +41,7 @@ services:
       - POSTGRES_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
       - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - ai-network
 
@@ -53,6 +53,8 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@racksync.com}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}
       - TZ=${GENERIC_TIMEZONE:-UTC}
+    depends_on:
+      - postgres
     ports:
       - "5050:80"
     networks:
@@ -65,7 +67,7 @@ services:
     environment:
       - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
-      - ./qdrant_data:/qdrant/storage
+      - qdrant_data:/qdrant/storage
     ports:
       - "6333:6333"
     networks:
