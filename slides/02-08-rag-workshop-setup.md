@@ -12,13 +12,13 @@ services:
   postgres:
     image: postgres:14
     # ... ตัดออกเพื่อความกระชับ
-  chroma:
-    image: chromadb/chroma:latest
-    container_name: chromadb
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
     ports:
-      - "8000:8000"
+      - "6333:6333"
     volumes:
-      - chroma_data:/chroma/chroma
+      - qdrant_data:/qdrant/storage
 ```
 
 ## Presenter Notes (ข้อมูลสำหรับผู้บรรยาย)

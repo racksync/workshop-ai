@@ -121,14 +121,14 @@ services:
     networks:
       - ai-network
       
-  chroma:
-    image: chromadb/chroma:latest
-    container_name: chromadb
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
     restart: always
     volumes:
-      - chroma_data:/chroma/chroma
+      - qdrant_data:/qdrant/storage
     ports:
-      - "8000:8000"
+      - "6333:6333"
     networks:
       - ai-network
       
@@ -151,7 +151,7 @@ services:
 volumes:
   n8n_data:
   postgres_data:
-  chroma_data:
+  qdrant_data:
   minio_data:
 
 networks:

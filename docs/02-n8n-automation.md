@@ -232,10 +232,22 @@ services:
     networks:
       - n8n-network
 
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: always
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - n8n-network
+
 volumes:
   n8n_data:
   postgres_data:
   chroma_data:
+  qdrant_data:
 
 networks:
   n8n-network:
