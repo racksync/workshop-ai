@@ -1,6 +1,8 @@
 services:
   n8n:
     image: n8nio/n8n:latest
+    labels:
+      - dev.orbstack.domains=${N8N_HOST:-localhost}
     container_name: n8n
     restart: always
     ports:
@@ -22,8 +24,9 @@ services:
       - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
       - ./n8n_data:/home/node/.n8n
-    # depends_on:
-    #   - postgres
+      - ./n8n_data/files:/files
+    depends_on:
+      - postgres
     #   - qdrant
     networks:
       - ai-network
@@ -41,7 +44,20 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
       - ai-network
-      
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@racksync.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+    ports:
+      - "5050:80"
+    networks:
+      - ai-network
+     
   qdrant:
     image: qdrant/qdrant:latest
     container_name: qdrant
@@ -55,10 +71,10 @@ services:
     networks:
       - ai-network
       
-# volumes:
-#   n8n_data:
-#   postgres_data:
-#   qdrant_data:
+volumes:
+#  n8n_data:
+  postgres_data:
+  qdrant_data:
 
 networks:
   ai-network:

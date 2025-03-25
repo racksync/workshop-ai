@@ -1,4 +1,4 @@
 n8n_data/
 postgres_data/
 qdrant_data/
-.dev.dev
+.env.dev
