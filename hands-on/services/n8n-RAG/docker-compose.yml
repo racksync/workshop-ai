@@ -11,12 +11,13 @@ services:
       - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
-      - NODE_ENV=production
+      - NODE_ENV=production # Set to "production" or "development"
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-your-secret-key}
-      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-      - N8N_RUNNERS_ENABLED=true
-      - WEBHOOK_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:5678/
-      - DB_TYPE=postgresdb
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true # Prevents the settings file from being world-readable
+      - N8N_SECURE_COOKIE=false # Disable Prevents the use of cookies over HTTPs
+      - N8N_RUNNERS_ENABLED=true # Enable additional runners
+      - WEBHOOK_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:5678/ # The public URL of the n8n instance
+      - DB_TYPE=postgresdb 
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
       - DB_POSTGRESDB_DATABASE=n8n
@@ -25,7 +26,7 @@ services:
       - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
       - ./n8n_data:/home/node/.n8n
-      - ./n8n_data/files:/files
+      - ./n8n_data/files:/files 
     depends_on:
       - postgres
     #   - qdrant
@@ -75,7 +76,7 @@ services:
       - ai-network
       
 volumes:
-#  n8n_data:
+  #n8n_data:
   postgres_data:
   qdrant_data:
 
