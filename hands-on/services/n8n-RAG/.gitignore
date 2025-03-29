@@ -4,3 +4,4 @@ postgres_data/
 qdrant_data/
 .dev/
 .env.dev
+.venv
