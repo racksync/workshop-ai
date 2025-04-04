@@ -11,11 +11,13 @@ services:
       - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
-      - NODE_ENV=production # Set to "production" or "development"
+      - NODE_ENV=development # Set to "production" or "development"
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-your-secret-key}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true # Prevents the settings file from being world-readable
       - N8N_SECURE_COOKIE=false # Disable Prevents the use of cookies over HTTPs
+      - N8N_USER_MANAGEMENT_JWT_SECRET=${N8N_USER_MANAGEMENT_JWT_SECRET:-secret-key}
       - N8N_RUNNERS_ENABLED=true # Enable additional runners
+      - N8N_PERSONALIZATION=false # Disable personalization
       - WEBHOOK_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:5678/ # The public URL of the n8n instance
       - DB_TYPE=postgresdb 
       - DB_POSTGRESDB_HOST=postgres
@@ -24,6 +26,15 @@ services:
       - DB_POSTGRESDB_USER=n8n
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
       - TZ=${GENERIC_TIMEZONE:-UTC}
+      # N8N Logs
+      - N8N_LOG_LEVEL=info # Set the log level to "info"
+      - N8N_LOG_OUTPUT=console # Set the log output to "console"
+      - N8N_LOG_FILE=/home/node/.n8n/logs/n8n.log # Set the log file path
+      - N8N_LOG_FILE_MAX_SIZE=120mb # Set the maximum log file size
+      - N8N_LOG_FILE_MAX_FILES=10 # Set the maximum number of log files to keep
+      - N8N_LOG_FILE_COMPRESSION=true # Enable log file compression
+      - N8N_LOG_FILE_ROTATE=true # Enable log file rotation
+      - N8N_LOG_FILE_ROTATE_INTERVAL=1d # Set the log file rotation interval
     volumes:
       - ./n8n_data:/home/node/.n8n
       - ./n8n_data/files:/files 
@@ -68,11 +79,15 @@ services:
     restart: always
     environment:
       - TZ=${GENERIC_TIMEZONE:-UTC}
+      - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY:-secret-key}
     volumes:
-      - qdrant_data:/qdrant/storage
+      - ./qdrant_data:/qdrant/storage
     ports:
       - "6333:6333"
       - "6334:6334"
+    configs:
+      - source: qdrant_config
+        target: /qdrant/config/production.yaml
     networks:
       - ai-network
       
@@ -84,3 +99,8 @@ volumes:
 networks:
   ai-network:
     driver: bridge
+
+configs:
+  qdrant_config:
+    content: |
+      log_level: INFO
