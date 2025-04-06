@@ -98,6 +98,7 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${ZEROTRUST_TOKEN}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
     networks:
       - ai-network
     depends_on:
