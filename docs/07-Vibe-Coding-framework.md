@@ -1,4 +1,4 @@
-# Session 7: Bolt Framework
+# Session 7: Vibe Coding - Bolt Framework
 
 <div class="text-center">
   <img src="../assets/images/bolt-framework.png" alt="Bolt Framework Overview" width="650" />

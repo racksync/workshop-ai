@@ -74,8 +74,8 @@ RAG (Retrieval-Augmented Generation) เป็นเทคนิคที่ผ�
 
 สำหรับการสร้างระบบ RAG ที่สมบูรณ์ เราจะติดตั้งองค์ประกอบหลักดังนี้:
 1. n8n - สำหรับจัดการ workflow และเชื่อมต่อระบบต่างๆ
-2. ChromaDB - ฐานข้อมูลแบบเวกเตอร์สำหรับเก็บ embeddings
-3. MinIO - บริการจัดเก็บไฟล์แบบ object storage เพื่อเก็บเอกสาร (PDF, DOCX)
+2. Qdrant - ฐานข้อมูลแบบเวกเตอร์สำหรับเก็บ embeddings
+3. Google Drive - บริการจัดเก็บไฟล์บนคลาวด์เพื่อเก็บเอกสาร (PDF, DOCX)
 4. PostgreSQL - ฐานข้อมูลสำหรับเก็บข้อมูลการทำงานของ n8n
 
 ```yaml
@@ -103,8 +103,7 @@ services:
       - n8n_data:/home/node/.n8n
     depends_on:
       - postgres
-      - chroma
-      - minio
+      - qdrant
     networks:
       - ai-network
 
@@ -131,28 +130,11 @@ services:
       - "6333:6333"
     networks:
       - ai-network
-      
-  minio:
-    image: minio/minio:latest
-    container_name: minio
-    restart: always
-    command: server /data --console-address ":9001"
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
-    volumes:
-      - minio_data:/data
-    networks:
-      - ai-network
 
 volumes:
   n8n_data:
   postgres_data:
   qdrant_data:
-  minio_data:
 
 networks:
   ai-network:
@@ -164,7 +146,7 @@ networks:
 ```mermaid
 flowchart TD
     subgraph "Data Ingestion"
-        A[รับไฟล์] --> B[จัดเก็บใน MinIO]
+        A[รับไฟล์] --> B[จัดเก็บใน Google Drive]
         B --> C[แปลงเป็นข้อความ]
         C --> D[แบ่ง chunks]
         D --> E[สร้าง embeddings]
@@ -186,55 +168,60 @@ flowchart TD
 #### 3.1 Data Ingestion Workflow
 
 1. **รับไฟล์**: ใช้ HTTP Request node หรือ Webhook node เพื่อรับไฟล์เอกสารจากผู้ใช้
-2. **จัดเก็บไฟล์**: บันทึกไฟล์ลงใน MinIO ด้วย S3 node
+2. **จัดเก็บไฟล์**: บันทึกไฟล์ลงใน Google Drive ด้วย Google Drive node
 3. **แปลงเอกสาร**: ทำการแปลงเอกสารประเภทต่างๆ ให้เป็นข้อความด้วย Function node
 4. **แบ่ง chunks**: แบ่งข้อความเป็นส่วนย่อยที่มีความหมายด้วย Function node เพื่อให้เหมาะสมกับการสร้าง embeddings
 5. **สร้าง embeddings**: ส่งข้อความไปยัง OpenAI API ผ่าน OpenAI node เพื่อแปลงเป็น embedding vectors
-6. **จัดเก็บใน Vector DB**: นำ embeddings ที่ได้ส่งไปเก็บใน ChromaDB ผ่าน HTTP Request node
+6. **จัดเก็บใน Vector DB**: นำ embeddings ที่ได้ส่งไปเก็บใน Qdrant ผ่าน HTTP Request node
 
 #### 3.2 Query Workflow
 
 1. **รับคำถาม**: ใช้ Webhook node เพื่อรับคำถามจากผู้ใช้
 2. **สร้าง embedding ของคำถาม**: แปลงคำถามเป็น embedding vector ด้วย OpenAI node
-3. **ค้นหาข้อมูลที่เกี่ยวข้อง**: ค้นหาเนื้อหาที่เกี่ยวข้องใน ChromaDB ด้วยการเปรียบเทียบ embeddings
+3. **ค้นหาข้อมูลที่เกี่ยวข้อง**: ค้นหาเนื้อหาที่เกี่ยวข้องใน Qdrant ด้วยการเปรียบเทียบ embeddings
 4. **สร้างบริบท**: รวบรวมข้อมูลที่ค้นพบมาสร้างเป็นบริบทที่เกี่ยวข้องกับคำถาม
 5. **สร้างคำตอบ**: ส่งคำถามพร้อมบริบทไปยัง OpenAI API เพื่อสร้างคำตอบที่แม่นยำ
 6. **ตอบกลับ**: ส่งคำตอบกลับไปยังผู้ใช้ผ่าน HTTP Response
 
 ### 4. การจัดการองค์ประกอบของ RAG ใน n8n
 
-#### 4.1 Vector Database (ChromaDB)
+#### 4.1 Vector Database (Qdrant)
 
-ChromaDB API ตัวอย่างที่ใช้ใน n8n HTTP Request node:
+Qdrant API ตัวอย่างที่ใช้ใน n8n HTTP Request node:
 
 - **สร้าง Collection:**
-  - Method: POST
-  - URL: http://chroma:8000/api/v1/collections
-  - Body: `{ "name": "my_documents" }`
+  - Method: PUT
+  - URL: http://qdrant:6333/collections/my_documents
+  - Body: `{ "vectors": { "size": 1536, "distance": "Cosine" } }`
 
 - **เพิ่ม Embeddings:**
-  - Method: POST
-  - URL: http://chroma:8000/api/v1/collections/my_documents/add
-  - Body: `{ "ids": ["1"], "embeddings": [embedding_vector], "metadatas": [{"source": "document1.pdf"}], "documents": ["text content"] }`
+  - Method: PUT
+  - URL: http://qdrant:6333/collections/my_documents/points
+  - Body: `{ "points": [{ "id": 1, "vector": [embedding_vector], "payload": {"source": "document1.pdf", "text": "text content"} }] }`
 
 - **ค้นหาข้อมูล:**
   - Method: POST
-  - URL: http://chroma:8000/api/v1/collections/my_documents/query
-  - Body: `{ "query_embeddings": [query_vector], "n_results": 5 }`
+  - URL: http://qdrant:6333/collections/my_documents/points/search
+  - Body: `{ "vector": [query_vector], "limit": 5 }`
 
-#### 4.2 Document Storage (MinIO)
+#### 4.2 Document Storage (Google Drive)
 
-การตั้งค่า MinIO ใน n8n:
+การตั้งค่า Google Drive ใน n8n:
 
-1. เข้าถึง MinIO Console ที่ http://localhost:9001
-2. สร้าง bucket ชื่อ "documents" สำหรับเก็บไฟล์เอกสาร
-3. สร้าง access key และ secret key สำหรับการเข้าถึงจาก n8n
-4. ใน n8n ใช้ S3 node เชื่อมต่อกับ MinIO โดยตั้งค่าดังนี้:
-   - Host: minio
-   - Port: 9000
-   - Access Key ID: [your-access-key]
-   - Secret Access Key: [your-secret-key]
-   - Use SSL: false
+1. เพิ่ม Google Drive credentials ใน n8n
+   - ไปที่เมนู Credentials และเลือก "Create New Credentials"
+   - เลือกประเภท "OAuth2 API"
+   - เลือก "Google Drive" 
+   - ทำการเชื่อมต่อกับบัญชี Google ของคุณ
+
+2. สร้างโฟลเดอร์ใน Google Drive สำหรับเก็บเอกสาร
+   - สร้างโฟลเดอร์ชื่อ "RAG_Documents"
+   - จดบันทึก ID ของโฟลเดอร์เพื่อใช้ในการอัปโหลดไฟล์
+
+3. ใน n8n ใช้ Google Drive node เพื่อจัดการไฟล์:
+   - Operation: Upload
+   - Folder: ใส่ ID ของโฟลเดอร์ที่สร้างไว้
+   - Binary Property: เลือก property ที่มีไฟล์ที่ต้องการอัปโหลด
 
 #### 4.3 OpenAI API Integration
 
@@ -269,6 +256,7 @@ return results;
    ```bash
    docker-compose up -d
    ```
+3. ตั้งค่าการเชื่อมต่อกับ Google Drive ใน n8n
 
 #### 5.2 สร้าง Data Ingestion Workflow
 
@@ -284,8 +272,8 @@ return results;
 ## 📚 แหล่งข้อมูลเพิ่มเติม
 
 - [n8n Documentation](https://docs.n8n.io/)
-- [ChromaDB Documentation](https://docs.trychroma.com/)
-- [MinIO Documentation](https://min.io/docs/minio/linux/index.html)
+- [Qdrant Documentation](https://qdrant.tech/documentation/)
+- [Google Drive API Documentation](https://developers.google.com/drive/api/guides/about-sdk)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
 - [RAG: Retrieval-Augmented Generation โดย AWS](https://aws.amazon.com/th/what-is/retrieval-augmented-generation/)
 - [LangChain RAG Framework](https://python.langchain.com/docs/use_cases/question_answering/)
