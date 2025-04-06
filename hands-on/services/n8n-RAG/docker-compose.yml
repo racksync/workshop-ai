@@ -90,6 +90,18 @@ services:
         target: /qdrant/config/production.yaml
     networks:
       - ai-network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${ZEROTRUST_TOKEN}
+    networks:
+      - ai-network
+    depends_on:
+      - n8n
       
 volumes:
   #n8n_data:
