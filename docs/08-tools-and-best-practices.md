@@ -1,7 +1,7 @@
 # Session 8: Tools & Best Practices
 
 <div class="text-center">
-  <img src="../assets/images/ai-tools-ecosystem.jpg" alt="AI Tools Ecosystem" width="750" />
+  <img src="../assets/images/ai-future.jpg" alt="AI Tools Ecosystem" width="750" />
 </div>
 
 ## 🔍 ภาพรวม

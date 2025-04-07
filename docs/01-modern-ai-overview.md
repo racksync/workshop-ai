@@ -6,7 +6,7 @@
 ## ภาพรวมเทคโนโลยี AI ปัจจุบัน
 
 <div class="text-center">
-  <img src="../assets/images/ai-landscape-2024.jpg" alt="AI Landscape 2024" width="800" />
+  <img src="../assets/images/ai-landscape-2025.png" alt="AI Landscape 2025" width="800" />
 </div>
 
 ### AI ยุคปัจจุบัน: ความก้าวหน้าและความสำคัญ

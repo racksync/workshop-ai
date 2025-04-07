@@ -1,7 +1,7 @@
 # Session 5: OpenAI API และ Gemini API
 
 <div class="text-center">
-  <img src="../assets/images/api-comparison.jpg" alt="API Comparison" width="700" />
+  <img src="../assets/images/racksync-ai-api.png" alt="API Comparison" width="700" />
 </div>
 
 ## 🔍 ภาพรวม
