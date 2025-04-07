@@ -1,0 +1,376 @@
+{
+  "name": "Google Sheets - General Content (SEO)",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        120
+      ],
+      "id": "5137133e-201e-4703-9797-73dc2bb7da55",
+      "name": "When clicking ‘Test workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=#ROLE:\nคุณจะรับบทเป็น ผู้เชี่ยวชาญด้านการเขียนเนื้อหา SEO Friendly ที่มุ่งเน้นการสร้างเนื้อหาที่เป็นมิตรต่อทั้งผู้อ่านและเครื่องมือค้นหา (Search Engines) โดยมีเป้าหมายให้เนื้อหามีอันดับที่ดีบน Google และกระตุ้นให้ผู้เข้าชมมีส่วนร่วมผ่านเนื้อหาที่อ่านง่ายและใช้ภาษาที่เข้าใจได้ง่าย\n\n#INSTRUCTION:\nคุณจะสร้างเนื้อหา SEO ที่เน้นการใช้ คำสำคัญ (Keyword) อย่างเหมาะสม เขียนในรูปแบบที่เข้าใจง่าย มีโครงสร้างที่อ่านสะดวก และเน้นการให้ข้อมูลที่มีคุณค่าแก่กลุ่มเป้าหมาย\n\n#STEPS:\n\n1. วิเคราะห์คำสำคัญ (Keyword Research)\nระบุ คำสำคัญหลัก และ คำสำคัญรอง ที่เกี่ยวข้อง เช่น คำที่ผู้คนใช้ค้นหาและใช้ค้นหาเนื้อหานี้ใน Google\n2. ตั้งชื่อบทความให้น่าสนใจ\nสร้างชื่อบทความที่น่าสนใจที่ดึงดูดการคลิก ดึงดูดให้ผู้อ่านคลิก เช่น\n\"5 เคล็ดลับเลือกผลิตภัณฑ์ออร์แกนิค ราคาคุ้มค่า\"\n\"วิธีดูแลสุขภาพสำหรับสาวๆ สำหรับหนุ่มสาวสายฟิต\"\n3. เขียนบทความให้น่าสนใจ\nเริ่มต้นบทความด้วย คำถามที่เกี่ยวข้อง หรือ ปัญหาที่ผู้อ่านเป้าหมายต้องการคำตอบ  \nใส่คำสำคัญหลักอย่างเป็นธรรมชาติ\n4. สร้างโครงสร้างที่ชัดเจน\nแบ่งเนื้อหาเป็นหัวข้อย่อย (H2, H3) ให้เหมาะสม  \nแต่ละส่วนควรมีคำสำคัญรอง และ แต่ละส่วนควรตอบคำถามหรือให้ข้อมูลที่ผู้อ่านต้องการ\n5. เขียนให้อ่านง่าย\nใช้ภาษาที่เป็นกันเอง เช่น การใช้คำว่า \"คุณ\", \"เรา\", หรือคำถามที่เชื่อมโยงกับผู้อ่านโดยตรง  \nใช้ประโยคสั้น กระชับ และ เลือกสิ่งสำคัญที่ผู้อ่านสนใจเป็นไฮไลท์\n6. เพิ่ม Call to Action (CTA)\nสรุปเนื้อหาพร้อมใส่ข้อความกระตุ้นให้ผู้อ่านดำเนินการ เช่น  \n\"อย่ารอช้า! กดติดตามเพื่อรับเคล็ดลับดีๆ ทุกวัน\"  \n\"สนใจความสวยแบบไร้สารพิษ คลิกสอบถามเพิ่มเติมเลยตอนนี้เลย!\"\n\n#EXPECTATION:\nบทความต้อง:  \n✅ มีคำสำคัญหลักและคำสำคัญรอง แทรกอยู่ในหัวข้อ บทนำ และเนื้อหาอย่างเป็นธรรมชาติ  \n✅ ภาษาอ่านง่าย เป็นกันเอง และสะดุดตาความสนใจ  \n✅ มีความยาวไม่ต่ำกว่า 800 คำ\n\n#INPUT:\n\nกลุ่มเป้าหมาย: คนทำงานออฟฟิศอายุ 25-45 ปี  \nคำสำคัญหลัก: {{ $json.Topic }}  \nวัตถุประสงค์: {{ $json.Objectives }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        440,
+        -100
+      ],
+      "id": "adb53363-2ba1-495b-b9b3-0424d6b60cf9",
+      "name": "AI Agent",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-thinking-exp-1219",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        460,
+        280
+      ],
+      "id": "d2f9ffbb-bb97-4744-8429-6b4fefd66c8a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EZNt5KWicDP0EnGT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "phi4:14b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        400
+      ],
+      "id": "46bc8d3d-96d7-4fa0-82a8-211a493c6137",
+      "name": "Ollama Chat Model",
+      "notesInFlow": false,
+      "credentials": {
+        "ollamaApi": {
+          "id": "LqrILUxDpMacgWLM",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 429654275,
+          "mode": "list",
+          "cachedResultName": "General Content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=429654275"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -360,
+        -140
+      ],
+      "id": "124d9925-75be-444b-9b4c-70e36cfae027",
+      "name": "Google Sheets Read",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "eZItVDk1tbCSm0ze",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 429654275,
+          "mode": "list",
+          "cachedResultName": "General Content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=429654275"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets Read').item.json.row_number }}",
+            "Status": "Done",
+            "Output Content": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Objectives",
+              "displayName": "Objectives",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Output Content",
+              "displayName": "Output Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        860,
+        -100
+      ],
+      "id": "a3a9a4cb-9f5d-41fb-814e-6684c6516bda",
+      "name": "Google Sheets Update",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "eZItVDk1tbCSm0ze",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": "={{ $json.row_number }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        160,
+        -100
+      ],
+      "id": "82dfdb9c-e729-45d5-bb3e-79b2d7670ddb",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Loop",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -280
+      ],
+      "id": "bee7f0b6-46ff-47b1-8412-430b30f8ba9e"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 429654275,
+          "mode": "list",
+          "cachedResultName": "General Content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=429654275"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -140
+      ],
+      "id": "dedb0adf-e5b2-4192-9167-f4286560e21c",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "ThUva1ddlHo5TrP8",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Read": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "677d4ce7-7d62-4b88-b1e7-feb6cdae418d",
+  "meta": {
+    "instanceId": "341c5a6b1d575fb343bde47531535511b29a36df554d778242514eead0b27334"
+  },
+  "id": "sjPinwfakqogczWi",
+  "tags": []
+}

@@ -1,0 +1,377 @@
+{
+  "name": "Google Sheets - Course Assistant",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        80
+      ],
+      "id": "77f4ca40-2835-48c3-81af-7fbf8f48e200",
+      "name": "When clicking ‘Test workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=#ROLE:\n\nคุณจะรับบทเป็น ผู้เชี่ยวชาญด้านการสร้างหลักสูตร IT และ Technology และ Automation ที่เน้นด้านการ Re-skill และ On The Job Training โดยมีความเชี่ยวชาญเฉพาะทางในด้าน Infrastructure, Cloud, Cloud Native และ DevOps และ Automation มีเป้าหมายในการออกแบบและพัฒนาหลักสูตรที่ตรงกับความต้องการขององค์กรและผู้เรียนอย่างมีประสิทธิภาพ\n\n#INSTRUCTION:\n\nคุณจะสร้างเนื้อหาหลักสูตรที่เน้นการใช้คำสำคัญ (Keyword) ที่เกี่ยวข้องกับ IT, Cloud, DevOps, Security, AI และ Developer อย่างเหมาะสม เขียนในรูปแบบที่เข้าใจง่าย มีโครงสร้างที่อ่านสะดวก และเน้นให้ผู้เรียนสามารถนำความรู้ไปใช้ในการทำงานได้จริง\n\n#STEPS:\n\n1. วิเคราะห์คำสำคัญ (Keyword Research)\n\nระบุ คำสำคัญหลัก และ คำสำคัญรอง ที่เกี่ยวข้องกับหัวข้อหลักสูตร เช่น คำที่องค์กรหรือผู้เรียนมักใช้ค้นหาข้อมูลหรือคอร์สเรียนออนไลน์ที่เกี่ยวข้องกับ IT, Cloud, Infrastructure, DevOps, Security, AI และ Developer\n\nตัวอย่าง Keyword เพิ่มเติม: Cloud Engineer, Cybersecurity, Machine Learning, Continuous Integration (CI), Continuous Deployment (CD), Microservices, Serverless Computing, Terraform, Infrastructure as Code (IaC), Docker,GitOps,Jenkins,Agile Development,Automation, Monitoring and Observability, Smart Home, Home Automation\n\n2. ตั้งชื่อหลักสูตรให้น่าสนใจ\n\nสร้างชื่อหลักสูตรที่ดึงดูดและชัดเจนในการสื่อสารผลลัพธ์ที่ผู้เรียนจะได้รับ เช่น\n\n\"DevOps Essentials: เพิ่มประสิทธิภาพการทำงานด้วย CI/CD\"\n\n\"เตรียมพร้อมสู่องค์กรยุคใหม่ด้วย Cloud Native Skills\"\n\n3. เขียนคำอธิบายหลักสูตรที่ชัดเจน\n\nเริ่มต้นคำอธิบายด้วยคำถามหรือปัญหาที่องค์กรหรือผู้เรียนต้องการแก้ไข\nแทรกคำสำคัญหลักอย่างเป็นธรรมชาติและตรงจุดประสงค์\n\n4. สร้างโครงสร้างหลักสูตรที่ชัดเจน\n\nแบ่งหลักสูตรออกเป็น Module และ Lesson (H2, H3) พร้อมระบุเป้าหมายการเรียนรู้ในแต่ละส่วน\nแต่ละ Module ต้องมีการระบุคำสำคัญรองที่เกี่ยวข้องและเน้นการนำไปประยุกต์ใช้จริง\n\nตัวอย่างโครงสร้างหลักสูตรพร้อมระยะเวลาสัดส่วนเหมาะสม:\n\nModule 1: พื้นฐาน Cloud Infrastructure (3 ชั่วโมง)\n\nLesson 1.1: ความแตกต่างระหว่าง On-Premise และ Cloud\n\nLesson 1.2: Cloud Computing และ Infrastructure\n\nModule 2: การใช้งานและจัดการ Kubernetes (4 ชั่วโมง)\n\nLesson 2.1: Container และ Orchestration\n\nLesson 2.2: Kubernetes ในงานจริง\n\nModule 3: DevOps และ Automation (3 ชั่วโมง)\n\nLesson 3.1: การใช้งาน CI/CD และ GitOps\n\nLesson 3.2: การใช้ Jenkins และ Terraform\n\nModule 4: Security และ Observability (2 ชั่วโมง)\n\nLesson 4.1: หลักการ Cybersecurity และ Security บน Cloud\n\nLesson 4.2: การ Monitoring และ Observability บนระบบ Cloud Native\n\n5. เน้นการเรียนรู้ที่นำไปใช้ได้จริง\n\nเขียนเนื้อหาในรูปแบบที่เข้าใจง่าย ใช้ภาษาเป็นกันเอง และกระตุ้นการมีส่วนร่วมของผู้เรียน\nใช้ตัวอย่างกรณีศึกษา (Case Study) หรือกิจกรรมแบบ On The Job Training เพื่อให้ผู้เรียนได้ฝึกปฏิบัติจริง\n\n6. เพิ่ม Call to Action (CTA)\n\nสรุปเนื้อหาหลักสูตรพร้อมใส่ข้อความกระตุ้นให้ผู้เรียนดำเนินการ เช่น\n\n\"พร้อมแล้วหรือยังที่จะอัปเกรดทักษะ DevOps ของคุณ? สมัครเรียนได้ทันที!\"\n\n\"อย่าพลาดโอกาสในการเป็นผู้นำด้าน Cloud Native ในองค์กรของคุณ สอบถามรายละเอียดเพิ่มเติมได้ที่นี่!\"\n\nระยะเวลาคอร์ส:\n\nระบุระยะเวลาของหลักสูตร เช่น หลักสูตร 12 ชั่วโมง (3 วัน)\n\nวัตถุประสงค์ของคอร์ส:\n\nเพื่อพัฒนาทักษะด้าน Infrastructure, Cloud และ DevOps\n\nเพื่อเพิ่มประสิทธิภาพการทำงานผ่านเทคโนโลยี Automation และ Cloud Native\n\nเพื่อให้ผู้เรียนสามารถนำความรู้ไปปรับใช้ในการทำงานจริงได้ทันที\n\nกลุ่มผู้เรียน:\n\nผู้ทำงานด้าน IT และ Technology\n\nนักพัฒนา (Developer), วิศวกร Cloud (Cloud Engineer)\n\nผู้ที่ต้องการพัฒนาทักษะด้าน DevOps, Security และ Automation\n\n#EXPECTATION:\n\nหลักสูตรที่สร้างต้อง:\n✅ ใช้คำสำคัญหลักและรองอย่างเหมาะสมในชื่อ คำอธิบาย และโครงสร้างหลักสูตร\n✅ มีเนื้อหาที่เน้นการปฏิบัติจริง เหมาะสำหรับการ Re-skill และ On The Job Training\n✅ มีภาษาอ่านง่าย เป็นกันเอง และเหมาะกับกลุ่มเป้าหมายที่เป็นผู้ทำงานสาย IT และ Technology\n✅ มีรายละเอียดเนื้อหาที่ชัดเจน ครอบคลุม Infrastructure, Cloud, Cloud Native, DevOps, Security และ Automation\n\n#INPUT:\nกลุ่มเป้าหมาย: กลุ่มคนทำงานด้าน IT  อายุ 20 ขึ้นไป\nคำสำคัญหลัก: {{ $json.Topic }}\nวัตถุประสงค์: {{ $json.Objectives }}\nวัตถุประสงค์: ให้ข้อมูลและกระตุ้นให้ผู้อ่านสนใจในการปรับเปลี่ยนบ้านธรรมดาเป็น Smart Home",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        320,
+        -140
+      ],
+      "id": "e77d24cc-1b33-4b5d-9d92-436e0784e884",
+      "name": "AI Agent",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-thinking-exp-1219",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        340,
+        240
+      ],
+      "id": "98ad0ba9-ff6d-4c2b-aced-9126f6ddd521",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EZNt5KWicDP0EnGT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "phi4:14b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        360
+      ],
+      "id": "063f90a5-83c7-46ff-9ecb-4495b6778f3f",
+      "name": "Ollama Chat Model",
+      "notesInFlow": false,
+      "credentials": {
+        "ollamaApi": {
+          "id": "LqrILUxDpMacgWLM",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 623870702,
+          "mode": "list",
+          "cachedResultName": "Course Assistant",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=623870702"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -480,
+        -180
+      ],
+      "id": "adf063f7-6913-48ff-a3eb-4cdcc9f7b1b5",
+      "name": "Google Sheets Read",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "eZItVDk1tbCSm0ze",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 623870702,
+          "mode": "list",
+          "cachedResultName": "Course Assistant",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=623870702"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets Read').item.json.row_number }}",
+            "Status": "Done",
+            "Output Content": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Objectives",
+              "displayName": "Objectives",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Output Content",
+              "displayName": "Output Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        740,
+        -140
+      ],
+      "id": "9fd6949a-ed50-40ff-9a96-168dbcecd223",
+      "name": "Google Sheets Update",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "eZItVDk1tbCSm0ze",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": "={{ $json.row_number }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        40,
+        -140
+      ],
+      "id": "de59cefa-64e7-4192-b215-e54cf81dc3c5",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Loop",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -320
+      ],
+      "id": "65028a30-09d2-49ed-b2c8-53f76f2a760c"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+          "mode": "list",
+          "cachedResultName": "01 - n8n Workshop",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 623870702,
+          "mode": "list",
+          "cachedResultName": "Course Assistant",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q/edit#gid=623870702"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -180
+      ],
+      "id": "d5dab6b0-0b1b-4511-a6c4-4b2b8681eb68",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "ThUva1ddlHo5TrP8",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Read": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0337c709-8120-4625-b731-10f54f272c48",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "341c5a6b1d575fb343bde47531535511b29a36df554d778242514eead0b27334"
+  },
+  "id": "vXrWWzvAMdR63YMJ",
+  "tags": []
+}
