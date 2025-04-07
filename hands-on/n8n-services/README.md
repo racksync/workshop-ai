@@ -29,23 +29,23 @@
 
 ⭐️ **การวิเคราะห์เอกสารทางการเงินส่วนตัว** ด้วยต้นทุนที่ต่ำที่สุด
 
-## การติดตั้ง
 
-### การโคลน Repository
+
+### การรัน n8n ด้วย Docker Compose ด้วยวิธีที่ง่ายที่สุด
+
+Clone repository นี้ไปยังเครื่องของคุณ:
 
 ```bash
 git clone https://github.com/racksync/workshop-ai.git
-cd work
+cd hands-on/n8n-services
+docker compose up -d
 ```
-
-### การรัน n8n ด้วย Docker Compose
 
 #### สำหรับผู้ใช้ Nvidia GPU
 
 ```
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
-docker compose --profile gpu-nvidia up
+cd workshop-ai/hands-on/n8n-services
+docker compose -f docker-compose-full.yml --profile gpu-nvidia up
 ```
 
 > [!NOTE]
@@ -55,9 +55,8 @@ docker compose --profile gpu-nvidia up
 ### สำหรับผู้ใช้ AMD GPU บน Linux
 
 ```
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
-docker compose --profile gpu-amd up
+cd workshop-ai/hands-on/n8n-services
+docker compose -f docker-compose-full.yml --profile gpu-amd up
 ```
 
 #### สำหรับผู้ใช้ Mac / Apple Silicon
@@ -72,8 +71,7 @@ docker compose --profile gpu-amd up
 สำหรับคำแนะนำการติดตั้ง และรันชุดเริ่มต้นดังนี้:
 
 ```
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
+cd workshop-ai/hands-on/n8n-services
 docker compose up
 ```
 
@@ -98,9 +96,8 @@ x-n8n: &service-n8n
 #### สำหรับทุกคน
 
 ```
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
-docker compose --profile cpu up
+cd workshop-ai/hands-on/n8n-services
+docker compose -f docker-compose-full.yml --profile cpu up
 ```
 
 ## ⚡️ เริ่มต้นใช้งานอย่างรวดเร็ว
@@ -130,8 +127,8 @@ docker compose --profile cpu up
 * ### สำหรับการตั้งค่า Nvidia GPU:
 
 ```bash
-docker compose --profile gpu-nvidia pull
-docker compose create && docker compose --profile gpu-nvidia up
+docker compose -f docker-compose-full.yml --profile gpu-nvidia pull
+docker compose create && docker compose -f docker-compose-full.yml --profile gpu-nvidia up
 ```
 
 * ### สำหรับผู้ใช้ Mac / Apple Silicon
@@ -144,8 +141,8 @@ docker compose create && docker compose up
 * ### สำหรับการตั้งค่า Non-GPU:
 
 ```bash
-docker compose --profile cpu pull
-docker compose create && docker compose --profile cpu up
+docker compose -f docker-compose-full.yml --profile cpu pull
+docker compose create && docker compose -f docker-compose-full.yml --profile cpu up
 ```
 
 ## 👓 การอ่านที่แนะนำ
