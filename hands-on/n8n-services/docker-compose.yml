@@ -82,9 +82,9 @@ services:
     command:
       - "-c"
       # Single files Import
-      - "n8n import:credentials --input=/backup/creds.json && n8n import:workflow --input=/backup/flows.json" 
+      #- "n8n import:credentials --input=/backup/creds.json && n8n import:workflow --input=/backup/flows.json" 
       # Folder Import
-      #- "n8n import:credentials --separate --input=/backup/creddentials/ && n8n import:workflow --separate --input=/backup/workflows/" 
+      - "n8n import:credentials --separate --input=/backup/creddentials/ && n8n import:workflow --separate --input=/backup/workflows/" 
     volumes:
       - ./n8n_backup:/backup
     depends_on:
