@@ -181,78 +181,154 @@ n8n สามารถใช้เป็นเครื่องมือใน�
 ### การติดตั้ง n8n พร้อม Vector Database สำหรับระบบ RAG
 
 ```yaml
-services:
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
-    restart: always
-    ports:
-      - "5678:5678"
-    environment:
+volumes:
+  #n8n_data:
+  postgres_data:
+  #qdrant_data:
+
+networks:
+  ai-network:
+    driver: bridge
+
+configs:
+  qdrant_config:
+    content: |
+      log_level: INFO
+
+x-n8n: &service-n8n
+  image: n8nio/n8n:latest
+  networks: 
+    - ai-network
+  environment:
       - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
-      - NODE_ENV=production
+      - NODE_ENV=development # Set to "production" or "development"
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-your-secret-key}
-      - DB_TYPE=postgresdb
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true # Prevents the settings file from being world-readable
+      - N8N_SECURE_COOKIE=false # Disable Prevents the use of cookies over HTTPs
+      - N8N_USER_MANAGEMENT_JWT_SECRET=${N8N_USER_MANAGEMENT_JWT_SECRET:-secret-key}
+      - N8N_RUNNERS_ENABLED=true # Enable additional runners
+      - N8N_PERSONALIZATION=false # Disable personalization
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL} # The public URL of the n8n instance
+      - DB_TYPE=postgresdb 
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n
-      - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
-      - WEBHOOK_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:5678/
-    volumes:
-      - n8n_data:/home/node/.n8n
-    depends_on:
-      - postgres
-    networks:
-      - n8n-network
+      - DB_POSTGRESDB_DATABASE=${POSTGRES_DB:-n8n}
+      - DB_POSTGRESDB_USER=${POSTGRES_USER:-n8n}
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD:-n8n}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+      # N8N Logs
+      - N8N_LOG_LEVEL=info # Set the log level to "info"
+      - N8N_LOG_OUTPUT=console # Set the log output to "console"
+      - N8N_LOG_FILE=/home/node/.n8n/logs/n8n.log # Set the log file path
+      - N8N_LOG_FILE_MAX_SIZE=120mb # Set the maximum log file size
+      - N8N_LOG_FILE_MAX_FILES=10 # Set the maximum number of log files to keep
+      - N8N_LOG_FILE_COMPRESSION=true # Enable log file compression
+      - N8N_LOG_FILE_ROTATE=true # Enable log file rotation
+      - N8N_LOG_FILE_ROTATE_INTERVAL=1d # Set the log file rotation interval
+      - OLLAMA_HOST=host.docker.internal:11434
+  env_file:
+    - .env
 
+
+
+services:
+  n8n:
+    <<: *service-n8n
+    hostname: n8n
+    container_name: n8n
+    restart: always
+    labels:
+      - dev.orbstack.domains=${N8N_HOST:-localhost}
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+      - ./n8n_data/files:/files 
+      - ./n8n_backup:/backup
+      - ./shared:/data/shared
+    depends_on:
+      postgres:
+        condition: service_healthy
+ 
   postgres:
-    image: postgres:14
+    image: postgres:16-alpine
     container_name: n8n-postgres
     restart: always
     environment:
-      - POSTGRES_DB=n8n
-      - POSTGRES_USER=n8n
-      - POSTGRES_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
+      - POSTGRES_USER=${POSTGRES_USER:-n8n}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-n8n}
+      - POSTGRES_DB=${POSTGRES_DB:-n8n}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - n8n-network
-      
-  chroma:
-    image: chromadb/chroma:latest
-    container_name: chromadb
-    restart: always
-    ports:
-      - "8000:8000"
-    volumes:
-      - chroma_data:/chroma/chroma
-    networks:
-      - n8n-network
+      - ai-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@racksync.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    networks:
+      - ai-network
+     
   qdrant:
     image: qdrant/qdrant:latest
     container_name: qdrant
     restart: always
+    environment:
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY:-secret-key}
+    volumes:
+      - ./qdrant_data:/qdrant/storage
     ports:
       - "6333:6333"
-    volumes:
-      - qdrant_data:/qdrant/storage
+      - "6334:6334"
+    configs:
+      - source: qdrant_config
+        target: /qdrant/config/production.yaml
     networks:
-      - n8n-network
+      - ai-network
 
-volumes:
-  n8n_data:
-  postgres_data:
-  chroma_data:
-  qdrant_data:
-
-networks:
-  n8n-network:
-    driver: bridge
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${ZEROTRUST_TOKEN}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+    networks:
+      - ai-network
+    depends_on:
+      - n8n
+ 
 ```
+
+## การเข้าถึง
+
+### n8n
+หลังจากเริ่มระบบแล้ว สามารถเข้าถึง n8n ได้ที่: [http://localhost:5678](http://localhost:5678)
+
+### Qdrant
+Qdrant สามารถเข้าถึงได้ผ่านพอร์ต 6333 โดยใช้ URL: [http://localhost:6333](http://localhost:6333/dashboard)
+
+### pgAdmin
+pgAdmin สามารถเข้าถึงได้ผ่านพอร์ต 5050 โดยใช้ URL: [http://localhost:5050](http://localhost:5050)
 
 ## 📚 แหล่งข้อมูลเพิ่มเติม
 
