@@ -1,4 +1,5 @@
 .DS_Store
-# resources/
-# slides/
+resources/
+slides/
 .dev
+hands-on/services
