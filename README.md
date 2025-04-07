@@ -36,13 +36,13 @@ cd workshop-ai
 |-------|------------|
 | **[Prerequisite](docs/00-prerequisite.md)** | • การเตรียมความพร้อมก่อนเรียน<br>• พื้นฐานทั่วไป |
 | **[Session 1: Modern AI Overview](docs/01-modern-ai-overview.md)** | • ภาพรวมเทคโนโลยี AI ปัจจุบัน<br>• Generative AI, LLMs, Model |br>• Generative AI, LLMs, Model |
-| **[Session 2: n8n Automation](docs/02-n8n-Automation.md)** | • แนะนำ n8n: Low-code Workflow Automation |ow-code Workflow Automation |
-| **[Session 3: AI Agentic (Agent)](docs/03-AI-Agentic.md)** | • แนวคิด Agentic AI<br>• ตัวอย่างเครื่องมือ/Framework สำหรับสร้าง Agent<br>• Use Cases: Chatbot ที่ทำงานอัตโนมัติ, สั่งการระบบอื่นๆ<br>• การเชื่อมต่อ Agent กับ Automation เพื่อทำงานแบบ End-to-End |
-| **[Session 4: RAG (Retrieval-Augmented Generation)](docs/04-RAG.md)** | • หลักการทำงานของ RAG<br>• การประยุกต์ใช้ใน use case ต่าง ๆ (เช่น Q&A, Chatbot)<br>• แนะนำ Library หรือ Framework ที่ใช้ |
-| **[Session 5: OpenAI API และ Gemini API](docs/05-API-Provider.md)** | • แนะนำ OpenAI API, Gemini API<br>• วิธีการสร้างโปรเจกต์เล็ก ๆ เพื่อประยุกต์ใช้ API<br>• ควรระวังเรื่อง Cost และ Best Practices |
-| **[Session 6: Open-WebUI และ Ollama](docs/06-Open-WebUI-and-Ollama.md)** | • Open-WebUI คืออะไร?<br>• เครื่องมือ Chat Web UI/Open Source LLM UI<br>• การปรับแต่งโมเดล / Custom endpoint |
-| **[Session 7: Vibe Coding & Framework](docs/07-Vibe-Coding-framework.md)** | • Bolt คืออะไร?<br>• การใช้ Bolt เพื่อพัฒนา Web Application แบบรวดเร็วทั้ง back-end และ front end<br>• แนวทางการ Deploy |
-| **[Session 8: Tools & Best Practices](docs/08-Tools-and-Best-Practices.md)** | • แนะนำเครื่องมืออื่น ๆ ที่เกี่ยวข้อง<br>• แนวทางการดูแลโมเดล, Security และ Data Privacy<br>• Best Practices ในการออกแบบ Workflow |
+| **[Session 2: n8n Automation](docs/02-n8n-automation.md)** | • แนะนำ n8n: Low-code Workflow Automation |ow-code Workflow Automation |
+| **[Session 3: AI Agentic (Agent)](docs/03-ai-agentic.md)** | • แนวคิด Agentic AI<br>• ตัวอย่างเครื่องมือ/Framework สำหรับสร้าง Agent<br>• Use Cases: Chatbot ที่ทำงานอัตโนมัติ, สั่งการระบบอื่นๆ<br>• การเชื่อมต่อ Agent กับ Automation เพื่อทำงานแบบ End-to-End |
+| **[Session 4: RAG (Retrieval-Augmented Generation)](docs/04-rag.md)** | • หลักการทำงานของ RAG<br>• การประยุกต์ใช้ใน use case ต่าง ๆ (เช่น Q&A, Chatbot)<br>• แนะนำ Library หรือ Framework ที่ใช้ |
+| **[Session 5: OpenAI API และ Gemini API](docs/05-api-provider.md)** | • แนะนำ OpenAI API, Gemini API<br>• วิธีการสร้างโปรเจกต์เล็ก ๆ เพื่อประยุกต์ใช้ API<br>• ควรระวังเรื่อง Cost และ Best Practices |
+| **[Session 6: Open-WebUI และ Ollama](docs/06-open-webui-and-ollama.md)** | • Open-WebUI คืออะไร?<br>• เครื่องมือ Chat Web UI/Open Source LLM UI<br>• การปรับแต่งโมเดล / Custom endpoint |
+| **[Session 7: Vibe Coding & Framework](docs/07-vibe-coding-framework.md)** | • Bolt คืออะไร?<br>• การใช้ Bolt เพื่อพัฒนา Web Application แบบรวดเร็วทั้ง back-end และ front end<br>• แนวทางการ Deploy |
+| **[Session 8: Tools & Best Practices](docs/08-tools-and-best-practices.md)** | • แนะนำเครื่องมืออื่น ๆ ที่เกี่ยวข้อง<br>• แนวทางการดูแลโมเดล, Security และ Data Privacy<br>• Best Practices ในการออกแบบ Workflow |
 | **Q&A, Summary & Next Steps** | • ถาม-ตอบ สรุปแนวทางต่อยอดของผู้เรียน<br>• แชร์ Resource & Community สำหรับการพัฒนาต่อ |
 
 
