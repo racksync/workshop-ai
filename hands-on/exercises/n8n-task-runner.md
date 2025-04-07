@@ -83,3 +83,4 @@ services:
 ### หมายเหตุ
 - การตั้งค่า External Mode เหมาะสำหรับการใช้งานใน Production
 - ควรตรวจสอบความปลอดภัยของ Shared Secret และการตั้งค่า Network
+
