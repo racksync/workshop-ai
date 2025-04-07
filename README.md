@@ -34,8 +34,8 @@ cd workshop-ai
 
 | หัวข้อ | รายละเอียด |
 |-------|------------|
-| **[Prerequisite](docs/00-Prerequisite.md)** | • การเตรียมความพร้อมก่อนเรียน<br>• พื้นฐานทั่วไป |
-| **[Session 1: Modern AI Overview](docs/01-Modern-AI-Overview.md)** | • ภาพรวมเทคโนโลยี AI ปัจจุบัน<br>• Generative AI, LLMs, Model |br>• Generative AI, LLMs, Model |
+| **[Prerequisite](docs/00-prerequisite.md)** | • การเตรียมความพร้อมก่อนเรียน<br>• พื้นฐานทั่วไป |
+| **[Session 1: Modern AI Overview](docs/01-modern-ai-overview.md)** | • ภาพรวมเทคโนโลยี AI ปัจจุบัน<br>• Generative AI, LLMs, Model |br>• Generative AI, LLMs, Model |
 | **[Session 2: n8n Automation](docs/02-n8n-Automation.md)** | • แนะนำ n8n: Low-code Workflow Automation |ow-code Workflow Automation |
 | **[Session 3: AI Agentic (Agent)](docs/03-AI-Agentic.md)** | • แนวคิด Agentic AI<br>• ตัวอย่างเครื่องมือ/Framework สำหรับสร้าง Agent<br>• Use Cases: Chatbot ที่ทำงานอัตโนมัติ, สั่งการระบบอื่นๆ<br>• การเชื่อมต่อ Agent กับ Automation เพื่อทำงานแบบ End-to-End |
 | **[Session 4: RAG (Retrieval-Augmented Generation)](docs/04-RAG.md)** | • หลักการทำงานของ RAG<br>• การประยุกต์ใช้ใน use case ต่าง ๆ (เช่น Q&A, Chatbot)<br>• แนะนำ Library หรือ Framework ที่ใช้ |
