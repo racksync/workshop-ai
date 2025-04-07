@@ -2,7 +2,7 @@
 
 **ชุดเริ่มต้น AI แบบโฮสต์เอง** เป็นเทมเพลต Docker Compose แบบโอเพ่นซอร์สที่ออกแบบมาเพื่อเริ่มต้นสภาพแวดล้อมการพัฒนา AI และ low-code ในเครื่องได้อย่างรวดเร็ว
 
-![n8n.io - Screenshot](https://raw.githubusercontent.com/n8n-io/self-hosted-ai-starter-kit/main/assets/n8n-demo.gif)
+![n8n.io - Screenshot](https://github.com/racksync/workshop-ai/blob/main/hands-on/n8n-services/assets/n8n-demo.gif)
 
 จัดทำโดย <https://github.com/n8n-io> ซึ่งรวมแพลตฟอร์ม n8n แบบโฮสต์เองเข้ากับรายการผลิตภัณฑ์และส่วนประกอบ AI ที่เข้ากันได้ เพื่อเริ่มต้นสร้างเวิร์กโฟลว์ AI แบบโฮสต์เองได้อย่างรวดเร็ว
 
@@ -34,8 +34,8 @@
 ### การโคลน Repository
 
 ```bash
-git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git
-cd self-hosted-ai-starter-kit
+git clone https://github.com/racksync/workshop-ai.git
+cd work
 ```
 
 ### การรัน n8n ด้วย Docker Compose

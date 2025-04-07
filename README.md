@@ -2,6 +2,12 @@
 
 ![Modern AI Overview Header](assets/images/modern-ai-header.jpg)
 
+## Clone the Repository
+```bash
+git clone https://github.com/racksync/workshop-ai.git
+cd work
+```
+
 ## 📚 Course Overview
 
 **Video Conference (Live & Record)**
