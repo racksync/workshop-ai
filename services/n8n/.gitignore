@@ -1,7 +1,0 @@
-# Restricted files and directories
-n8n_data/
-postgres_data/
-qdrant_data/
-.dev/
-.env.dev
-.venv
