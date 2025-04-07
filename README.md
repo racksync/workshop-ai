@@ -5,7 +5,7 @@
 ## Clone the Repository
 ```bash
 git clone https://github.com/racksync/workshop-ai.git
-cd work
+cd workshop-ai
 ```
 
 ## 📚 Course Overview
