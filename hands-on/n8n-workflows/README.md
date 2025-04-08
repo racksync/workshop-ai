@@ -1,100 +1,100 @@
-# n8n Workflows - Workshop Guide
+# คู่มือการใช้งาน n8n Workflows สำหรับเวิร์กช็อป
 
-This directory contains a collection of n8n workflows created for the AI workshop. Each workflow demonstrates different functionality and integration capabilities of n8n with various services and AI models.
+ไดเรกทอรีนี้รวบรวม n8n workflows ที่สร้างขึ้นสำหรับเวิร์กช็อป AI โดยแต่ละเวิร์กโฟลว์แสดงให้เห็นถึงฟังก์ชันการทำงานและความสามารถในการรวมระบบของ n8n กับบริการและโมเดล AI ต่างๆ
 
-## Workflow Descriptions
+## รายละเอียดเวิร์กโฟลว์
 
-### Basic and Chat Workflows
+### เวิร์กโฟลว์พื้นฐานและแชท
 
-#### 01 - Basic n8n
-A simple introduction to n8n with a chat interface that acts as a bilingual translator (Thai-English) using Google Gemini. Demonstrates the basic setup of a language model with an agent.
+#### 01 - n8n พื้นฐาน
+การแนะนำ n8n แบบง่ายๆ ด้วยอินเทอร์เฟซแชทที่ทำหน้าที่เป็นตัวแปลภาษาสองภาษา (ไทย-อังกฤษ) โดยใช้ Google Gemini แสดงการตั้งค่าพื้นฐานของโมเดลภาษาที่มีเอเจนต์
 
 #### 02 - ChatBox
-An interactive chatbox implementation that allows users to have conversations with an AI assistant.
+การใช้งานกล่องแชทแบบโต้ตอบที่ช่วยให้ผู้ใช้สามารถสนทนากับผู้ช่วย AI ได้
 
 #### 03 - LINE Messaging API
-Integrates n8n with LINE Messaging API to create a customer service bot named "น้องจอย" that answers questions about RACKSYNC company services using Google Gemini model.
+ผสานรวม n8n กับ LINE Messaging API เพื่อสร้างบอทบริการลูกค้าชื่อ "น้องจอย" ที่ตอบคำถามเกี่ยวกับบริการของบริษัท RACKSYNC โดยใช้โมเดล Google Gemini
 
-#### 04 - Telegram Basic
-A Telegram bot implementation that processes messages and provides automated responses.
+#### 04 - Telegram พื้นฐาน
+การใช้งานบอท Telegram ที่ประมวลผลข้อความและให้การตอบสนองโดยอัตโนมัติ
 
-### Content Creation Workflows
+### เวิร์กโฟลว์การสร้างเนื้อหา
 
-#### 05 - Content Assistant - Google Sheets (Smart Home Content)
-Generates Smart Home content based on topics stored in Google Sheets. Uses AI to create SEO-friendly content about smart home technologies for homeowners aged 30-50.
+#### 05 - ผู้ช่วยสร้างเนื้อหา - Google Sheets (เนื้อหาบ้านอัจฉริยะ)
+สร้างเนื้อหาบ้านอัจฉริยะตามหัวข้อที่เก็บไว้ใน Google Sheets ใช้ AI เพื่อสร้างเนื้อหาที่เป็นมิตรกับ SEO เกี่ยวกับเทคโนโลยีบ้านอัจฉริยะสำหรับเจ้าของบ้านอายุ 30-50 ปี
 
-#### 06 - Content Assistant - Google Sheets (Strategic Creator)
-Creates strategic planning and management content for IT professionals. Monitors a Google Sheet for new topics and generates comprehensive business strategy content using the Google Gemini model.
+#### 06 - ผู้ช่วยสร้างเนื้อหา - Google Sheets (นักสร้างกลยุทธ์)
+สร้างเนื้อหาการวางแผนและการจัดการเชิงกลยุทธ์สำหรับผู้เชี่ยวชาญด้าน IT ตรวจสอบ Google Sheet เพื่อดูหัวข้อใหม่และสร้างเนื้อหากลยุทธ์ทางธุรกิจที่ครอบคลุมโดยใช้โมเดล Google Gemini
 
-#### 07 - Content Assistant - Google Sheets (Course Creator)
-Designs complete course curricula for IT and technology training, with a focus on reskilling and on-the-job training. The workflow reads course topics from a Google Sheet and creates structured course outlines.
+#### 07 - ผู้ช่วยสร้างเนื้อหา - Google Sheets (ผู้สร้างหลักสูตร)
+ออกแบบหลักสูตรการศึกษาที่สมบูรณ์สำหรับการฝึกอบรมด้าน IT และเทคโนโลยี โดยเน้นที่การพัฒนาทักษะใหม่และการฝึกอบรมในงาน เวิร์กโฟลว์อ่านหัวข้อหลักสูตรจาก Google Sheet และสร้างโครงร่างหลักสูตรที่มีโครงสร้าง
 
-#### 08 - Content Creator - Google Sheets - (SEO Assist)
-SEO-focused content generation workflow that creates optimized content for specific keywords. Targets office workers aged 25-45 and updates a Google Sheet with the generated content.
+#### 08 - ผู้สร้างเนื้อหา - Google Sheets - (ช่วยเหลือ SEO)
+เวิร์กโฟลว์การสร้างเนื้อหาที่เน้น SEO ซึ่งสร้างเนื้อหาที่ปรับให้เหมาะสมสำหรับคำสำคัญเฉพาะ เป้าหมายคือพนักงานออฟฟิศอายุ 25-45 ปี และอัปเดต Google Sheet ด้วยเนื้อหาที่สร้างขึ้น
 
-### Data Collection and Processing
+### การเก็บรวบรวมและประมวลผลข้อมูล
 
-#### 09 - LINE Download to Google Sheets
-Captures data received through LINE messages and saves it to Google Sheets for further processing or record-keeping.
+#### 09 - การดาวน์โหลด LINE ไปยัง Google Sheets
+จับข้อมูลที่ได้รับผ่านข้อความ LINE และบันทึกลงใน Google Sheets เพื่อการประมวลผลหรือการเก็บบันทึกเพิ่มเติม
 
-#### 10 - Read Transfer Slip to Google Sheets via LINE
-Processes payment slip images sent via LINE, extracts the transaction details, and records them in Google Sheets for financial tracking.
+#### 10 - อ่านสลิปการโอนเงินไปยัง Google Sheets ผ่าน LINE
+ประมวลผลภาพสลิปการชำระเงินที่ส่งผ่าน LINE ดึงรายละเอียดธุรกรรมและบันทึกลงใน Google Sheets สำหรับการติดตามทางการเงิน
 
-#### 11 - Email Attachments Analyzer
-Monitors an email inbox for attachments, extracts and analyzes their content, and generates structured data or summaries.
+#### 11 - ตัววิเคราะห์เอกสารแนบอีเมล
+ตรวจสอบกล่องจดหมายอีเมลสำหรับเอกสารแนบ ดึงและวิเคราะห์เนื้อหา และสร้างข้อมูลหรือสรุปที่มีโครงสร้าง
 
-#### 12 - Scrape Website
-Extracts data from websites through web scraping techniques, allowing for automated data collection from online sources.
+#### 12 - Scrape เว็บไซต์
+ดึงข้อมูลจากเว็บไซต์ผ่านเทคนิค web scraping ซึ่งช่วยให้สามารถเก็บรวบรวมข้อมูลจากแหล่งข้อมูลออนไลน์ได้โดยอัตโนมัติ
 
-### RAG (Retrieval-Augmented Generation) Implementations
+### การใช้งาน RAG (Retrieval-Augmented Generation)
 
 #### 13 - RAG - Qdrant (LINE Bot API)
-Implements a Retrieval-Augmented Generation system using Qdrant vector database with LINE messaging integration. Uses Google Drive Trigger to process documents, Google Gemini for embeddings, and responds to queries via a webhook.
+ใช้ระบบ Retrieval-Augmented Generation โดยใช้ฐานข้อมูลเวกเตอร์ Qdrant กับการรวมระบบการส่งข้อความ LINE ใช้ Google Drive Trigger ในการประมวลผลเอกสาร Google Gemini สำหรับสร้าง embeddings และตอบคำถามผ่าน webhook
 
-#### 14 - OpenAI + Qdrant (Movie RAG)
-Creates a specialized RAG system for movie information retrieval using OpenAI models with Qdrant vector database.
+#### 14 - OpenAI + Qdrant (RAG เกี่ยวกับภาพยนตร์)
+สร้างระบบ RAG เฉพาะทางสำหรับการค้นคืนข้อมูลภาพยนตร์โดยใช้โมเดล OpenAI กับฐานข้อมูลเวกเตอร์ Qdrant
 
 #### 15 - RAG - Pinecone
-Demonstrates RAG implementation using Pinecone vector database for efficient semantic search and knowledge retrieval.
+แสดงการใช้งาน RAG โดยใช้ฐานข้อมูลเวกเตอร์ Pinecone สำหรับการค้นหาเชิงความหมายและการค้นคืนความรู้อย่างมีประสิทธิภาพ
 
 #### 16 - RAG - Supabase (LINE Bot API)
-Uses Supabase for vector storage in a RAG system connected to LINE Bot API for natural language querying.
+ใช้ Supabase สำหรับการจัดเก็บเวกเตอร์ในระบบ RAG ที่เชื่อมต่อกับ LINE Bot API สำหรับการสืบค้นด้วยภาษาธรรมชาติ
 
-### Specialized Applications
+### แอปพลิเคชันเฉพาะทาง
 
 #### 17 - HR
-A workflow designed for HR departments to automate processes like employee onboarding, document management, or leave request handling.
+เวิร์กโฟลว์ที่ออกแบบสำหรับแผนก HR เพื่อทำกระบวนการอัตโนมัติ เช่น การเริ่มงานของพนักงาน การจัดการเอกสาร หรือการจัดการคำขอลา
 
 #### 18 - Home Assistant
-Integrates with Home Assistant platform to automate smart home controls and routines through n8n.
+รวมเข้ากับแพลตฟอร์ม Home Assistant เพื่อควบคุมและทำงานอัตโนมัติในบ้านอัจฉริยะผ่าน n8n
 
-## How to Use These Workflows
+## วิธีการใช้เวิร์กโฟลว์เหล่านี้
 
-1. Import the workflow JSON file into your n8n instance
-2. Configure credentials for any services used (Google Sheets, LINE, Telegram, etc.)
-3. Activate the workflow and test its functionality
+1. นำเข้าไฟล์ JSON เวิร์กโฟลว์ลงในอินสแตนซ์ n8n ของคุณ
+2. กำหนดค่าข้อมูลประจำตัวสำหรับบริการที่ใช้ (Google Sheets, LINE, Telegram ฯลฯ)
+3. เปิดใช้งานเวิร์กโฟลว์และทดสอบฟังก์ชัน
 
-## Required Credentials
+## ข้อมูลประจำตัวที่จำเป็น
 
-Different workflows require different credentials, including:
-- Google account (for Sheets, Drive)
-- LINE Messaging API tokens
-- Telegram bot tokens
-- OpenAI API keys
-- Google Gemini (PaLM) API keys
-- Database credentials (Qdrant, Pinecone, Supabase)
-- Email account access
+เวิร์กโฟลว์ต่างๆ ต้องการข้อมูลประจำตัวที่แตกต่างกัน รวมถึง:
+- บัญชี Google (สำหรับ Sheets, Drive)
+- โทเค็น LINE Messaging API
+- โทเค็นบอท Telegram
+- คีย์ API ของ OpenAI
+- คีย์ API ของ Google Gemini (PaLM)
+- ข้อมูลประจำตัวของฐานข้อมูล (Qdrant, Pinecone, Supabase)
+- การเข้าถึงบัญชีอีเมล
 
-## Common Workflow Patterns
+## รูปแบบเวิร์กโฟลว์ทั่วไป
 
-Many of these workflows follow common patterns:
-- Trigger → Process → Respond
-- Monitor → Extract → Transform → Store
-- Query → Retrieve → Generate → Reply
+เวิร์กโฟลว์หลายรายการเหล่านี้มีรูปแบบทั่วไป:
+- ทริกเกอร์ → ประมวลผล → ตอบสนอง
+- ตรวจสอบ → ดึงข้อมูล → แปลงข้อมูล → จัดเก็บ
+- สืบค้น → ค้นคืน → สร้าง → ตอบกลับ
 
-## Additional Resources
+## ทรัพยากรเพิ่มเติม
 
-For more information on n8n and how to extend these workflows, refer to:
-- [n8n Documentation](https://docs.n8n.io/)
-- [Google Gemini API Documentation](https://ai.google.dev/docs)
-- [LINE Messaging API Documentation](https://developers.line.biz/en/docs/messaging-api/)
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับ n8n และวิธีการขยายเวิร์กโฟลว์เหล่านี้ โปรดดูที่:
+- [เอกสาร n8n](https://docs.n8n.io/)
+- [เอกสาร Google Gemini API](https://ai.google.dev/docs)
+- [เอกสาร LINE Messaging API](https://developers.line.biz/en/docs/messaging-api/)
