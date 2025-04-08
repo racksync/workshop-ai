@@ -1,0 +1,1236 @@
+{
+  "createdAt": "2025-04-07T07:52:58.708Z",
+  "updatedAt": "2025-04-07T13:44:20.106Z",
+  "id": "fLiap9OwsmyHlvE5",
+  "name": "11 - Email Attachments Analyzer",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "downloadAttachments": true,
+        "options": {}
+      },
+      "id": "538b5c87-7e4e-4b6c-a516-dffd521a9d60",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "position": [
+        -1580,
+        280
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "imap": {
+          "id": "Y1xPwE6LAMqHVpV0",
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operationMode": "nodeInputBinary",
+        "options": {
+          "binaryDataKey": "={{ $json.data }}",
+          "summarizationMethodAndPrompts": {
+            "values": {
+              "combineMapPrompt": "=## Email Summarization System Prompt\n\nYou are a specialized AI assistant focused exclusively on creating precise, concise summaries of emails. Your task is to analyze the complete email text provided as input and produce a clear, comprehensive summary that captures all essential information in a cohesive narrative format.\n\n### Your responsibilities:\n\n1. Extract and summarize the main topic and purpose of the email\n2. Identify key points, requests, deadlines, or action items mentioned\n3. Preserve critical details like dates, times, locations, and names\n4. Maintain the original tone and urgency level of the message\n5. Organize information in order of importance\n6. Remove unnecessary pleasantries, redundancies, and filler content\n7. Summarize in Thai\n\n### Summary format:\n\n- Begin with a one-sentence overview of the email's main purpose\n- Present all key information in a cohesive paragraph format (no bullet points)\n- Follow a logical flow from most to least important information\n- Include any critical deadlines, requests, or action items within the narrative\n- Keep the summary to 3-5 sentences total\n- Use clear, straightforward language with appropriate transitions between ideas\n- Preserve the original intent and meaning without introducing new information\n- Summarize in Thai Language if original content is Thai\n\n\n### What to exclude:\n\n- Greetings and sign-offs\n- Redundant information\n- Minor details that don't affect the main message\n- Your own opinions or interpretations\n- Information not explicitly stated in the email\n\nThe email text to summarize is:\n{{$json.data}}",
+              "prompt": "=Write a concise summary of the following in max 100 words :\n\n\"{{ $json.data }}\"\n\nDo not enter the total number of words used."
+            }
+          }
+        }
+      },
+      "id": "a9ddadc1-fc39-4930-9011-0937d29094fd",
+      "name": "Email Summarization Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "position": [
+        -480,
+        580
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "## เครื่องมือวิเคราะห์อีเมลอัตโนมัติด้วย AI: ประมวลผลไฟล์ PDF และรูปภาพ\n\nวิเคราะห์และสรุปเนื้อหาอีเมลโดยอัตโนมัติ ซึ่งจะช่วยประหยัดเวลาและเพิ่มประสิทธิภาพในการทำงาน ทำให้ข้อมูลสำคัญสามารถเข้าถึงได้ง่ายและนำไปใช้ปฏิบัติได้อย่างสะดวก\n\nโดยสรุปเนื้อหาทั้งหมดจะถูกจัดเก็บไว้ใน Google Sheet แต่ละรายการสรุปจะมีหมายเลขประจำตัว (ID) อ้างอิงเฉพาะสำหรับอีเมลแต่ละฉบับ\n\n## ขั้นตอนเบื้องต้นในการใช้งาน:\n\n- คัดลอก (Clone) ไฟล์ Google Sheet จากลิงก์นี้ [Google Drive Sheet](https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit?usp=sharing)\n- กรอก Chat_ID ลงใน Telegram node\n- เลือกโมเดล (AI model) ที่ท่านต้องการใช้งาน\n",
+        "height": 640,
+        "width": 720,
+        "color": 3
+      },
+      "id": "991575f9-1680-4750-b8cc-325dbfb952ff",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1620,
+        -760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "loose"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "31b7fb0b-3149-479e-852a-52c1ec8935ca",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $binary.data.fileExtension }}",
+                    "rightValue": "pdf"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "pdf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "loose"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "9fe6411d-cf35-4fdd-a9ad-8c96f0a5cf66",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    },
+                    "leftValue": "={{ $binary.data.fileExtension }}",
+                    "rightValue": "=/^(jpg|png)$/i"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "ddce54bd-933f-46ca-8a5d-e7b6885ee8ec",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -920,
+        80
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"content\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "id": "15b65d41-4e5b-4975-9c5b-b08ae1214f85",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        -280,
+        -240
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=output",
+        "options": {}
+      },
+      "id": "c668f0b9-dbcf-47ea-b680-c90b51e17244",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        -100,
+        -300
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "data.output"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "08c4f528-9b1c-4b12-9e87-41c4ace60edd",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "position": [
+        1080,
+        -400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "5cf96104-c887-44fe-b528-30171943dd15",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ $binary.isNotEmpty() }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "594581fb-211e-4ba7-8666-af8bbec5f597",
+      "name": "Contain attachments?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -1360,
+        280
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "jsCode": "let results = [];\n\nfor (const item of $input.all()) {\n  for (key of Object.keys(item.binary)) {\n        results.push({\n            json: {},\n            binary: {\n                data: item.binary[key],\n            }\n        });\n    }\n}\n\nreturn results;"
+      },
+      "id": "c88aa9d6-5355-4a44-8460-208e3b0c6109",
+      "name": "Get PDF and images attachments",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -1140,
+        80
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "b49bcf48-0704-4162-a9e1-8ce8be166246",
+      "name": "Extract from PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        -700,
+        -400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=## PDF Summarization System Prompt\n\nYou are a specialized AI assistant tasked with creating concise, accurate summaries of documents. Your goal is to extract and distill the most important information from the content provided as input and present it in a clear, precise plain text summary.\n\n### Your responsibilities:\n\n1. Identify the main topic and purpose of the document\n2. Extract key points, arguments, findings, or conclusions\n3. Preserve essential data points, statistics, dates, and figures\n4. Recognize and highlight critical information and takeaways\n5. Maintain the original document's logical structure in your summary\n6. Prioritize information based on its significance to the document's purpose\n\n\n### Summary format:\n\n- Provide your summary in plain text only (no formatting)\n- Begin with a concise overview of the document's main topic and purpose\n- Present important points in a logical, sequential narrative\n- Use clear, direct language that accurately represents the original content\n- Maintain appropriate context for all extracted information\n- Keep the summary concise while including all crucial information\n- Use proper transitions between topics to maintain readability\n- Summarize in Thai Language if original content is Thai\n\n\n### What to exclude:\n\n- Minor details that don't contribute to the main points\n- Repetitive information\n- Extensive examples unless they're critical to understanding\n- Citations, references, and bibliographic details unless specifically important\n- Decorative or non-essential images (describe important visualized data if relevant)\n- Your own interpretations or opinions not supported by the document\n\n{{ $json.text }}",
+        "hasOutputParser": true
+      },
+      "id": "be7cb537-5535-487b-b8f2-8444131d872b",
+      "name": "PDF Analyzer",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        -480,
+        -480
+      ],
+      "typeVersion": 1.5
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8",
+          "mode": "list",
+          "cachedResultName": "Analyze Email + Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $('Email Trigger (IMAP)').item.json.metadata['message-id'] }}",
+            "DATE": "={{ $now.format('dd/LL/yyyy') }}",
+            "TYPE": "pdf",
+            "EMAIL": "={{ $('Email Trigger (IMAP)').item.json.from }}",
+            "SUBJECT": "={{ $('Email Trigger (IMAP)').item.json.subject }}",
+            "SUMMARY": "={{ $json.output.content }}",
+            "TIME": "={{ $now.format('HH:mm:ss') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "DATE",
+              "displayName": "DATE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TIME",
+              "displayName": "TIME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUBJECT",
+              "displayName": "SUBJECT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TYPE",
+              "displayName": "TYPE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUMMARY",
+              "displayName": "SUMMARY",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "28affba8-482b-4724-be20-6788f2736901",
+      "name": "Save summary PDF",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -100,
+        -500
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1D9N2VJ4JsuqPKhM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "id": "afe561cb-b4fb-4afe-bdda-e89d3d431ac0",
+      "name": "All summaries",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        640,
+        -400
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "11592bed-7555-4e61-a692-d71b1a733fd4",
+              "name": "content",
+              "type": "string",
+              "value": "={{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b04946a9-a428-4415-a28d-90421f3f066e",
+      "name": "Map image summaries",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        100,
+        180
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "name": "={{$now.format('yyyyLLddhhiiss')}}-{{ $binary.data.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1GcdJ-6dyEaRJHkLmFDxmNScU2cZeVue4",
+          "mode": "list",
+          "cachedResultName": "RAG Materials",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1GcdJ-6dyEaRJHkLmFDxmNScU2cZeVue4"
+        },
+        "options": {}
+      },
+      "id": "1a05bcf2-95b7-41cf-9143-e44be93d7144",
+      "name": "Upload attachments",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -700,
+        260
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef348518-a9fb-4ea9-bd70-9dcf3bff092a",
+              "name": "content",
+              "type": "string",
+              "value": "={{ $json.response.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8cbaf484-623b-41d9-85ea-ed579def5eab",
+      "name": "Email summary",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        100,
+        380
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "chatId": "-4688722748",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "id": "338d1050-7002-4acb-a5f9-8b634f56bf57",
+      "name": "Send final summary",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1660,
+        -400
+      ],
+      "webhookId": "9c8e4675-762e-47dd-8cef-b94a5261ffd4",
+      "typeVersion": 1.2,
+      "credentials": {
+        "telegramApi": {
+          "id": "HAQ63pVDRjt5VS0H",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=The inputs to synthesize are:\n'''\n{{ $json.output }}\n'''\n\nSummarize in Thai Language if original content is Thai\n",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "## Comprehensive Email Analysis System Prompt\n\nYou are a specialized AI assistant tasked with creating a unified, concise summary of an email and all its attachments. Your input includes a summary of the email text, summaries of any images, and summaries of any PDF attachments. Your goal is to synthesize all this information into a single coherent summary that captures the essential message and purpose.\n\n### Your responsibilities:\n\n1. Identify the overarching theme or purpose connecting the email and its attachments\n2. Recognize relationships between the email content and the attached materials\n3. Extract and consolidate the most critical information from all sources\n4. Maintain proper context when combining information from different sources\n5. Prioritize information based on relevance to the email's main purpose\n6. Create a unified narrative that flows logically between email content and attachments\n\n### Input structure:\n- Email summary: A summary of the main email text\n- Image descriptions: Summaries of any images attached to the email\n- PDF summaries: Condensed versions of any PDF documents attached\n\n### Output format:\n\n- Provide your summary in plain text only\n- Begin with a one-sentence statement of the email's overall purpose and theme\n- Present a unified narrative that integrates information from the email and all attachments\n- Organize information by importance and relevance, not by source\n- Keep the final summary concise (5-7 sentences maximum) while including all essential information\n- Use clear transitions to maintain coherence when moving between different information sources\n- Preserve the original intent and tone of the communication\n\n### What to include:\n\n- The main topic and purpose of the communication\n- Key points from both the email and attachments\n- Critical requests, deadlines, or action items\n- Essential details like dates, figures, or specific references\n- Contextual information that clarifies the purpose of attachments\n\n### What to exclude:\n\n- Redundant information repeated across multiple sources\n- Minor details that don't contribute to understanding the main message\n- Excessive descriptions of attachments beyond their relevance to the email's purpose\n- Your own interpretations beyond what's supported by the input materials"
+            }
+          ]
+        }
+      },
+      "id": "a55493a2-41c8-4795-b056-150acc036f08",
+      "name": "Create final summary",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        1300,
+        -400
+      ],
+      "typeVersion": 1.5
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8",
+          "mode": "list",
+          "cachedResultName": "Analyze Email + Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $('Email Trigger (IMAP)').item.json.metadata['message-id'] }}",
+            "DATE": "={{ $now.format('dd/LL/yyyy') }}",
+            "TYPE": "image",
+            "EMAIL": "={{ $('Email Trigger (IMAP)').item.json.from }}",
+            "SUBJECT": "={{ $('Email Trigger (IMAP)').item.json.subject }}",
+            "SUMMARY": "={{ $json.content }}",
+            "TIME": "={{ $now.format('HH:mm:ss') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "DATE",
+              "displayName": "DATE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TIME",
+              "displayName": "TIME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUBJECT",
+              "displayName": "SUBJECT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TYPE",
+              "displayName": "TYPE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUMMARY",
+              "displayName": "SUMMARY",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "4ed5c56f-78ba-41d8-8800-36bb0a134ad0",
+      "name": "Save summary image",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        100,
+        -20
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1D9N2VJ4JsuqPKhM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8",
+          "mode": "list",
+          "cachedResultName": "Analyze Email + Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Attachments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XDJwHnNggzxkUq-2mirSvqvO0dpyDGWs_eaq3C3kNJ8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $('Email Trigger (IMAP)').item.json.metadata['message-id'] }}",
+            "DATE": "={{ $now.format('dd/LL/yyyy') }}",
+            "TYPE": "email",
+            "EMAIL": "={{ $('Email Trigger (IMAP)').item.json.from }}",
+            "SUBJECT": "={{ $('Email Trigger (IMAP)').item.json.subject }}",
+            "SUMMARY": "={{ $json.response.text }}",
+            "TIME": "={{ $now.format('HH:mm:ss') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "DATE",
+              "displayName": "DATE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TIME",
+              "displayName": "TIME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUBJECT",
+              "displayName": "SUBJECT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TYPE",
+              "displayName": "TYPE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SUMMARY",
+              "displayName": "SUMMARY",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "b23a549a-8d5c-44bd-bc17-620d1397d7ec",
+      "name": "Save summary text",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        100,
+        580
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1D9N2VJ4JsuqPKhM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html": "={{ $json.textHtml }}",
+        "options": {}
+      },
+      "id": "869e6395-fc54-43ef-8e98-5703d693dc1f",
+      "name": "Convert text",
+      "type": "n8n-nodes-base.markdown",
+      "position": [
+        -700,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.all();\n\nconst outputData = inputData.map(item => {\n  \n  const outputValue = item.json.output || item.json.content;\n\n  return {\n    data: {\n      output: outputValue \n    }\n  };\n});\n\nreturn outputData;"
+      },
+      "id": "0a705941-d625-4b3f-821a-7032d2f02f40",
+      "name": "Parsing",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        860,
+        -400
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "ดึงไฟล์แนบทั้งหมดที่อยู่ในอีเมล (ในขั้นตอนการทำงานนี้ จะพิจารณาเฉพาะ \nPDF และรูปภาพเท่านั้น)\n\n\n\n\n\n\n\n\n",
+        "height": 300,
+        "width": 260
+      },
+      "id": "fe06184e-698a-4917-a7e8-e262cc54958f",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1220,
+        -40
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "วิเคราะห์เนื้อหาของไฟล์ PDF และจัดทำสรุปเนื้อหาสำหรับแต่ละไฟล์\n\n\n\n\n\n\n\n\n",
+        "height": 240,
+        "width": 340
+      },
+      "id": "6a1b50bc-0326-4eb5-8d13-ed7a9698b64c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -520,
+        -580
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "วิเคราะห์เนื้อหาของรูปภาพ และอธิบายรายละเอียดอย่างถูกต้องแม่นยำ\n\n\n\n\n\n\n\n\n",
+        "height": 260
+      },
+      "id": "f04959d3-3995-4a8f-a511-8a772730b4bf",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -20
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "## Image Analysis System Prompt\n\nYou are a specialized AI assistant focused on analyzing images. Your task is to carefully examine the image provided as input and produce a detailed, accurate description in plain text format.\n\n### Your responsibilities:\n\n1. Observe and describe the main subject(s) or focal point(s) of the image\n2. Identify notable objects, people, animals, or other elements present\n3. Describe the setting, background, and environment if applicable\n4. Note any text visible in the image, transcribing it accurately\n5. Recognize any actions, activities, or events taking place\n6. Identify relevant contextual information (time of day, weather, season, etc.)\n7. Describe colors, lighting, composition, and other visual elements when relevant\n\n### Response format:\n\n- Provide your analysis in plain text only (no HTML, markdown, or other formatting)\n- Begin with a concise overview of what the image depicts\n- Follow with a detailed description covering all significant elements\n- Organize information logically, typically moving from main subjects to background details\n- Use clear, descriptive language that accurately represents what is actually visible\n- Keep descriptions objective and factual\n- Summarize in Thai Language if original content is Thai\n\n### What to exclude:\n\n- Speculation about elements not clearly visible in the image\n- Subjective judgments or interpretations beyond what is objectively present\n- Personal opinions about the quality or purpose of the image\n- Complex technical analysis unless specifically relevant\n- Any formatting beyond plain text\n\nThe image to analyze is the one provided in the input.",
+        "inputType": "base64",
+        "options": {}
+      },
+      "id": "2e9cc877-0a82-4821-99cb-3370693130a0",
+      "name": "Analyze image",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        -400,
+        80
+      ],
+      "typeVersion": 1.8,
+      "credentials": {
+        "openAiApi": {
+          "id": "cjkMLjxOGWyoEfIG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "วิเคราะห์เนื้อหาของอีเมลและสรุปสาระสำคัญของเนื้อหา\n\n\n\n\n\n\n\n4o\n\n",
+        "height": 280,
+        "width": 320
+      },
+      "id": "54c9cfff-fb6c-4276-a926-18ab04900a3b",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -520,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "สรุปเนื้อหาทั้งหมดจากองค์ประกอบต่าง ๆ ของอีเมล (ข้อความ, ไฟล์ PDF, รูปภาพ) จะถูกรวบรวมเข้าด้วยกัน และจัดทำเป็นสรุปฉบับสมบูรณ์ขั้นสุดท้าย\n",
+        "height": 520,
+        "width": 1000
+      },
+      "id": "6130a028-a788-4a78-a05e-63d81a6d65ee",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        -520
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "042f44ea-4268-4041-9d75-deac5a3bc5d0",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        -500,
+        880
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "cjkMLjxOGWyoEfIG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -480,
+        -240
+      ],
+      "id": "16980de8-25a5-4ceb-b1fa-80b197d5532c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cjkMLjxOGWyoEfIG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1360,
+        -140
+      ],
+      "id": "7b08334d-4005-4f84-b4ed-e81368944334",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "cjkMLjxOGWyoEfIG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": " ✅ email: ckwiz",
+        "height": 80,
+        "width": 340,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1820,
+        160
+      ],
+      "id": "9eebcbdf-4833-4a9c-baa0-2c83410deefb",
+      "name": "Sticky Note6"
+    }
+  ],
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Upload attachments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Extract from PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Upload attachments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsing": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Create final summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "All summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert text": {
+      "main": [
+        [
+          {
+            "node": "Email Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF Analyzer": {
+      "main": [
+        [
+          {
+            "node": "Save summary PDF",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All summaries": {
+      "main": [
+        [
+          {
+            "node": "Parsing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Save summary image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Map image summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email summary": {
+      "main": [
+        [
+          {
+            "node": "All summaries",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Extract from PDF": {
+      "main": [
+        [
+          {
+            "node": "PDF Analyzer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map image summaries": {
+      "main": [
+        [
+          {
+            "node": "All summaries",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Contain attachments?": {
+      "main": [
+        [
+          {
+            "node": "Get PDF and images attachments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create final summary": {
+      "main": [
+        [
+          {
+            "node": "Send final summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Contain attachments?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "PDF Analyzer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "Save summary text",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get PDF and images attachments": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Email Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "PDF Analyzer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Create final summary",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Email Trigger (IMAP)": {
+      "lastMessageUid": 36
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "dda0025a-8b2e-4334-b060-d4829fe8f6a1",
+  "triggerCount": 1,
+  "tags": []
+}

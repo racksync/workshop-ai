@@ -1,0 +1,107 @@
+{
+  "createdAt": "2025-04-07T14:24:06.045Z",
+  "updatedAt": "2025-04-07T20:37:51.139Z",
+  "id": "kAm1ueoSCdzM9DjX",
+  "name": "18 - Home Assistant",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "racksync",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "workshop-iot",
+          "mode": "name"
+        },
+        "events": [
+          "push"
+        ],
+        "options": {}
+      },
+      "id": "6e1676d1-f025-4a96-8b80-63719112fb39",
+      "name": "On any update in repository",
+      "type": "n8n-nodes-base.githubTrigger",
+      "position": [
+        -140,
+        -100
+      ],
+      "webhookId": "9f16fefe-dacf-48b8-a576-48ed0599e911",
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "W40im5OMgW7ORyOu",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "service",
+        "operation": "call",
+        "domain": "light",
+        "service": "turn_on",
+        "serviceAttributes": {
+          "attributes": [
+            {
+              "name": "entity_id",
+              "value": "light.wiz_mood_light_1"
+            },
+            {
+              "name": "rgb_color",
+              "value": "={{[255,0,0]}}"
+            }
+          ]
+        }
+      },
+      "id": "31265922-0795-452b-8d8a-847b682b0874",
+      "name": "Turn a light red",
+      "type": "n8n-nodes-base.homeAssistant",
+      "position": [
+        240,
+        -100
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "homeAssistantApi": {
+          "id": "F9TYXpeG9DdbSZxa",
+          "name": "Home Assistant account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On any update in repository": {
+      "main": [
+        [
+          {
+            "node": "Turn a light red",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:On any update in repository": {
+      "webhookId": 539674557,
+      "webhookEvents": [
+        "push"
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "3a4104de-4b41-451d-89c8-0a770330ea18",
+  "triggerCount": 1,
+  "tags": []
+}

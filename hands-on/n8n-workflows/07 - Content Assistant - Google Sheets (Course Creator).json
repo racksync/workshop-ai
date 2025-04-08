@@ -1,13 +1,17 @@
 {
-  "name": "Google Sheets - Course Assistant",
+  "createdAt": "2025-03-25T13:30:21.702Z",
+  "updatedAt": "2025-04-07T13:24:13.841Z",
+  "id": "vXrWWzvAMdR63YMJ",
+  "name": "07 - Content Assistant - Google Sheets (Course Creator)",
+  "active": false,
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -760,
-        80
+        -780,
+        -20
       ],
       "id": "77f4ca40-2835-48c3-81af-7fbf8f48e200",
       "name": "When clicking ‘Test workflow’",
@@ -22,8 +26,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.8,
       "position": [
-        320,
-        -140
+        40,
+        -180
       ],
       "id": "e77d24cc-1b33-4b5d-9d92-436e0784e884",
       "name": "AI Agent",
@@ -37,36 +41,15 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        340,
-        240
+        60,
+        40
       ],
       "id": "98ad0ba9-ff6d-4c2b-aced-9126f6ddd521",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "EZNt5KWicDP0EnGT",
+          "id": "IHDYLJF8QLP0DgRN",
           "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": "phi4:14b",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
-      "typeVersion": 1,
-      "position": [
-        -160,
-        360
-      ],
-      "id": "063f90a5-83c7-46ff-9ecb-4495b6778f3f",
-      "name": "Ollama Chat Model",
-      "notesInFlow": false,
-      "credentials": {
-        "ollamaApi": {
-          "id": "LqrILUxDpMacgWLM",
-          "name": "Ollama account"
         }
       }
     },
@@ -98,15 +81,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        -480,
-        -180
+        -560,
+        -170
       ],
       "id": "adf063f7-6913-48ff-a3eb-4cdcc9f7b1b5",
       "name": "Google Sheets Read",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "eZItVDk1tbCSm0ze",
+          "id": "1D9N2VJ4JsuqPKhM",
           "name": "Google Sheets account"
         }
       }
@@ -198,14 +181,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        740,
-        -140
+        560,
+        -160
       ],
       "id": "9fd6949a-ed50-40ff-9a96-168dbcecd223",
       "name": "Google Sheets Update",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "eZItVDk1tbCSm0ze",
+          "id": "1D9N2VJ4JsuqPKhM",
           "name": "Google Sheets account"
         }
       }
@@ -218,8 +201,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        40,
-        -140
+        -340,
+        -170
       ],
       "id": "de59cefa-64e7-4192-b215-e54cf81dc3c5",
       "name": "Loop Over Items"
@@ -230,8 +213,8 @@
       "name": "Loop",
       "typeVersion": 1,
       "position": [
-        -180,
-        -320
+        -280,
+        120
       ],
       "id": "65028a30-09d2-49ed-b2c8-53f76f2a760c"
     },
@@ -264,19 +247,18 @@
       "typeVersion": 1,
       "position": [
         -780,
-        -180
+        -220
       ],
       "id": "d5dab6b0-0b1b-4511-a6c4-4b2b8681eb68",
       "name": "Google Sheets Trigger",
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
-          "id": "ThUva1ddlHo5TrP8",
+          "id": "Oo8tE6JXqH0MLCFh",
           "name": "Google Sheets Trigger account"
         }
       }
     }
   ],
-  "pinData": {},
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -363,15 +345,23 @@
       ]
     }
   },
-  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "0337c709-8120-4625-b731-10f54f272c48",
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q",
+      "sheetId": 623870702,
+      "lastRevision": 335,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1tDRauZHOdr8mQfVd1tf2iBkALW3aDq2l4Wp9-3J1a1Q&revision=335&exportFormat=xlsx"
+    }
+  },
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "341c5a6b1d575fb343bde47531535511b29a36df554d778242514eead0b27334"
   },
-  "id": "vXrWWzvAMdR63YMJ",
+  "pinData": {},
+  "versionId": "4a588fbf-9ac8-464e-847b-b84d2c4b4f72",
+  "triggerCount": 1,
   "tags": []
 }

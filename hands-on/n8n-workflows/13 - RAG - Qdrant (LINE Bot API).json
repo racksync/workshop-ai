@@ -1,0 +1,615 @@
+{
+  "createdAt": "2025-03-29T11:36:12.924Z",
+  "updatedAt": "2025-04-08T02:25:41.467Z",
+  "id": "8eRv2wj3dbClvgap",
+  "name": "13 - RAG w/ Qdrant (LINE Bot API)",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1OQM4mX3hZvmQgD1Ftqw3MxaAQzAWrGNa",
+          "mode": "list",
+          "cachedResultName": "PRODUCT 1 - PDF",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1OQM4mX3hZvmQgD1Ftqw3MxaAQzAWrGNa"
+        },
+        "event": "fileUpdated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2560,
+        -1240
+      ],
+      "id": "fdf87251-b28b-42ae-9b8e-db4680d2b58a",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0d2cf559-9dcb-4990-9da7-4bca8e82c054",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2340,
+        -1240
+      ],
+      "id": "4dbc32b1-2947-4064-b72f-1bdc706e8eec",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2120,
+        -1240
+      ],
+      "id": "3207f524-6d47-4472-a4fe-10b1435c3a76",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -1900,
+        -1240
+      ],
+      "id": "01a652e8-8c87-49ba-a5db-00b7be7ac66a",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        -1560,
+        -1000
+      ],
+      "id": "ced6a5eb-a30d-4b1e-8fbf-e652e8a49d0b",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 1024,
+        "chunkOverlap": 512,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -1500,
+        -800
+      ],
+      "id": "d68ad2b5-4cf3-4cf7-bebf-e99429807e13",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "modelName": "models/text-embedding-004"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1740,
+        -940
+      ],
+      "id": "ecd5f942-64d5-4af2-aef9-280d5bdcef3a",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "logmatt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2600,
+        -520
+      ],
+      "id": "a113f0b0-86da-443c-87db-03208da5a7dd",
+      "name": "Webhook",
+      "webhookId": "e4e612cb-7961-4329-be8a-aaad1316cd58"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9c552b53-5234-46c4-be9c-7abe815de467",
+              "name": "body.events[0].message.text",
+              "value": "={{ $json.body.events[0].message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "90e13ac7-a4d5-4112-bd38-87e64ba65c8d",
+              "name": "body.events[0].message.id",
+              "value": "={{ $json.body.events[0].message.id }}",
+              "type": "string"
+            },
+            {
+              "id": "84f9ff0f-2a9f-4a86-8863-1649a589ca97",
+              "name": "body.events[0].source.userId",
+              "value": "={{ $json.body.events[0].source.userId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2380,
+        -520
+      ],
+      "id": "d7018cb9-8c29-4d92-a0d9-1bc9f8827128",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=คุณเป็นผู้ช่วยผู้หญิง ให้ตอบกลับคำถามเกี่ยวกับ Inverter Solarcell ที่่เก็บไว้ในฐานข้อมูลเท่านั้น การตอบชื่อบริษัทให้ใช้ตัวพิมพ์ใหญ่ทั้งหมด เช่น RACKSYNC \n\n# แนวทางเมื่อต้องตอบคำถาม\n\nเมื่อผู้ใช้ถามเกี่ยวกับร้านไฟฟ้า ไม่ว่าจะเป็นเรื่องสินค้า, ราคา, รายละเอียดสินค้า, สถานที่ตั้ง หรือบริการต่างๆ ให้ดำเนินการตามขั้นตอนด้านล่าง:\n\n1. **ค้นหาใน Vector Database**  \n   - ใช้คำถามจากผู้ใช้เพื่อทำการค้นหาใน Vector Database  \n   - ตรวจสอบคำถามเพื่อทำความเข้าใจ เช่น ชื่อสินค้า, ราคา, รายละเอียดสินค้า หรือรายละเอียดอื่น ๆ ที่ผู้ใช้ถาม\n\n2. **ตอบตามกฎการสรุป**  \n   - นำข้อมูล (Context) ที่ดึงได้จากฐานข้อมูล มาประกอบในการตอบคำถามให้ครบถ้วน  \n   - สร้างความมั่นใจในการสรุปผลหรือขยายเพิ่มเติม (ถ้าจำเป็น)\n\n3. **หากไม่พบข้อมูลใน Vector Database**  \n   - แจ้งผู้ใช้ว่าไม่พบข้อมูลที่ต้องการ  \n   - สรุปข้อมูลเท่าที่สามารถคาดคะเน หรือเสนอแนะอื่น ๆ เพิ่มเติมได้\n\n4. **ไม่ตอบคำถามสลับ**  \n   - หากไม่มีข้อมูลชัดเจนใน Vector Database ห้ามคาดเดาหรือให้ข้อมูลที่ไม่แน่นอน\n\nINPUT: {{ $json.body.events[0].message.text }}\n\n",
+        "options": {
+          "systemMessage": "You are sale assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -2120,
+        -520
+      ],
+      "id": "00cfb1e8-e1d0-4ef3-a0f7-a60136e58596",
+      "name": "Agent",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "notesInFlow": true,
+      "maxTries": 2,
+      "notes": "Wait: 5s"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"replyToken\": \" {{$('Webhook').item.json.body.events[0].replyToken}}\",\n  \"messages\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{{$json.output}}\"\n    }\n  ]\n}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 10000
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1520,
+        -520
+      ],
+      "id": "daf338a2-da28-46dd-baf2-101d01f3283a",
+      "name": "HTTP Request",
+      "notesInFlow": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "wWvB9Hz5830MIvCz",
+          "name": "LINE @logmatt reply"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.events[0].message.text }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -2040,
+        -220
+      ],
+      "id": "fe008476-63ed-4b8e-9a19-74d545473c4b",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "62IcG7PBBmwBMPxP",
+          "name": "Postgres Local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "rag_demo",
+        "description": "Call this tool to retrieve information to users.",
+        "topK": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        -1820,
+        -220
+      ],
+      "id": "8ab97209-314d-4bf9-9187-9b1d45a3ac44",
+      "name": "Answer questions with a vector store1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-exp-03-25",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -2300,
+        -60
+      ],
+      "id": "f45dc475-cd6f-47f7-b718-4a8521d39a5a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-exp-03-25",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        0
+      ],
+      "id": "0c7e58b8-9c63-467a-88be-cb5bfa7f773d",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "rag_demo",
+          "mode": "list",
+          "cachedResultName": "rag_demo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1,
+      "position": [
+        -1680,
+        -1240
+      ],
+      "id": "70af03cb-cc44-46cd-a86e-32485238f035",
+      "name": "Qdrant Vector Store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "F9LUpVIDvb95KvBg",
+          "name": "Qdrant API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "=rag_demo",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1,
+      "position": [
+        -1940,
+        0
+      ],
+      "id": "038adce0-9371-4dd8-9122-b18996f28f8a",
+      "name": "Qdrant Vector Store1",
+      "credentials": {
+        "qdrantApi": {
+          "id": "F9LUpVIDvb95KvBg",
+          "name": "Qdrant API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "LINE @logmatt",
+        "height": 100,
+        "width": 720,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3480,
+        -1220
+      ],
+      "typeVersion": 1,
+      "id": "2030707e-379c-4df3-819f-6a88d99c520b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "modelName": "models/text-embedding-004"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1940,
+        220
+      ],
+      "id": "fb14908b-62fc-4482-9b14-746482664613",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer questions with a vector store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer questions with a vector store1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Answer questions with a vector store1",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Google Drive Trigger": {
+      "lastTimeChecked": "2025-03-29T13:24:23Z"
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "4c874706-c83a-4eaa-971f-addad530fee3",
+  "triggerCount": 2,
+  "tags": []
+}

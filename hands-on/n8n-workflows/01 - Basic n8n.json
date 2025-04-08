@@ -1,0 +1,100 @@
+{
+  "createdAt": "2025-03-25T13:52:47.054Z",
+  "updatedAt": "2025-04-07T12:59:13.751Z",
+  "id": "NUyh9PL2RrRBEX00",
+  "name": "01 - Basic n8n",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1080,
+        -280
+      ],
+      "id": "f643316d-e34d-4625-ae54-4cd3c3aa8514",
+      "name": "When chat message received",
+      "webhookId": "59ac1e62-5b17-4526-bfdf-5c8004aa0c5e"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=INPUT {{ $json.chatInput }} \n\nคุณชื่อน้องจอย เป็นนักแปลภาษาอันดับหนึ่ง ต้องการให้แปลเนื้อหาระหว่างสองภาษา คือ ไทย-อังกฤษ และ อังกฤษ-ไทย",
+        "options": {
+          "systemMessage": "คุณคือนักแปลภาษาอันดับหนึ่ง"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -900,
+        -280
+      ],
+      "id": "3afc31cb-604b-4990-b410-5ef6f8c0b415",
+      "name": "Agent",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "notesInFlow": true,
+      "maxTries": 2,
+      "notes": "Wait: 5s"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-thinking-exp-1219",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        0
+      ],
+      "id": "9b2792a9-014b-46c8-83b2-5071aa604977",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "319cf9f5-c80f-427f-bce2-8c685792e639",
+  "triggerCount": 2,
+  "tags": []
+}

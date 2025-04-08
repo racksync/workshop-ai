@@ -1,0 +1,604 @@
+{
+  "createdAt": "2025-04-05T06:49:19.966Z",
+  "updatedAt": "2025-04-08T02:45:12.715Z",
+  "id": "I59LAZQBbG2uACqT",
+  "name": "15 - RAG Pinecone",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1240,
+        -620
+      ],
+      "id": "c01b7fa9-a257-40f0-b5f8-a9410c3fc60b",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1D9OAxuDARZ3zW-N04yy4P5Sb59AB8cIk",
+            "mode": "list",
+            "cachedResultName": "PRODUCT 2 - RACKSHOP",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1D9OAxuDARZ3zW-N04yy4P5Sb59AB8cIk"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1020,
+        -620
+      ],
+      "id": "87ccee76-2ebf-47c3-9821-71c2498b54a7",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -800,
+        -620
+      ],
+      "id": "12075984-8264-4c3e-920f-f4c6a8f4970e",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "product-shop",
+          "mode": "list",
+          "cachedResultName": "product-shop"
+        },
+        "options": {
+          "pineconeNamespace": "items"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        -580,
+        -620
+      ],
+      "id": "90d38fcc-9209-4ddb-b621-d81ef3a467ac",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "M8fLFNE1OFwCayPy",
+          "name": "Pinecone API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/embedding-001"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -740,
+        -340
+      ],
+      "id": "dcab4325-ef40-4f1f-9986-70dff6d3cb10",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -300
+      ],
+      "id": "d744a12a-3dad-4b51-9402-59bae8bb53de",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -80
+      ],
+      "id": "b71466b4-6484-4bde-8de4-6b22ba37e814",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1D9OAxuDARZ3zW-N04yy4P5Sb59AB8cIk",
+          "mode": "list",
+          "cachedResultName": "PRODUCT 2 - RACKSHOP",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1D9OAxuDARZ3zW-N04yy4P5Sb59AB8cIk"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        -360
+      ],
+      "id": "ffff51c9-d4c5-4cf8-a2fc-92b9389537c7",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Fj7lxMygXDU9wUwc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "logmatt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1320,
+        260
+      ],
+      "id": "dae6ccee-91a8-4a76-8d80-c6643794fe68",
+      "name": "Webhook",
+      "webhookId": "e4e612cb-7961-4329-be8a-aaad1316cd58"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9c552b53-5234-46c4-be9c-7abe815de467",
+              "name": "body.events[0].message.text",
+              "value": "={{ $json.body.events[0].message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "90e13ac7-a4d5-4112-bd38-87e64ba65c8d",
+              "name": "body.events[0].message.id",
+              "value": "={{ $json.body.events[0].message.id }}",
+              "type": "string"
+            },
+            {
+              "id": "84f9ff0f-2a9f-4a86-8863-1649a589ca97",
+              "name": "body.events[0].source.userId",
+              "value": "={{ $json.body.events[0].source.userId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1100,
+        260
+      ],
+      "id": "d3c2fccc-e683-4110-bce4-5c8984a60693",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# แนวทางเมื่อต้องตอบคำถาม\n\nเมื่อผู้ใช้ถามเกี่ยวกับร้านไฟฟ้า ไม่ว่าจะเป็นเรื่องสินค้า, ราคา, รายละเอียดสินค้า, สถานที่ตั้ง หรือบริการต่างๆ ให้ดำเนินการตามขั้นตอนด้านล่าง:\n\n1. **ค้นหาใน Vector Database**  \n   - ใช้คำถามจากผู้ใช้เพื่อทำการค้นหาใน Vector Database  \n   - ตรวจสอบคำถามเพื่อทำความเข้าใจ เช่น ชื่อสินค้า, ราคา, รายละเอียดสินค้า หรือรายละเอียดอื่น ๆ ที่ผู้ใช้ถาม\n\n2. **ตอบตามกฎการสรุป**  \n   - นำข้อมูล (Context) ที่ดึงได้จากฐานข้อมูล มาประกอบในการตอบคำถามให้ครบถ้วน  \n   - สร้างความมั่นใจในการสรุปผลหรือขยายเพิ่มเติม (ถ้าจำเป็น)\n\n3. **หากไม่พบข้อมูลใน Vector Database**  \n   - แจ้งผู้ใช้ว่าไม่พบข้อมูลที่ต้องการ  \n   - สรุปข้อมูลเท่าที่สามารถคาดคะเน หรือเสนอแนะอื่น ๆ เพิ่มเติมได้\n\n4. **ไม่ตอบคำถามสลับ**  \n   - หากไม่มีข้อมูลชัดเจนใน Vector Database ห้ามคาดเดาหรือให้ข้อมูลที่ไม่แน่นอน\n\nINPUT: {{ $json.body.events[0].message.text }}\n\n",
+        "options": {
+          "systemMessage": "You are sale assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -840,
+        260
+      ],
+      "id": "a945ef89-cd1a-4716-b812-2e2a063622cf",
+      "name": "Agent",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "notesInFlow": true,
+      "maxTries": 2,
+      "notes": "Wait: 5s"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"replyToken\": \" {{$('Webhook').item.json.body.events[0].replyToken}}\",\n  \"messages\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{{$json.output}}\"\n    }\n  ]\n}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 10000
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        260
+      ],
+      "id": "13021648-cd00-41a4-a2a5-afe344905930",
+      "name": "HTTP Request",
+      "notesInFlow": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "wWvB9Hz5830MIvCz",
+          "name": "LINE @logmatt reply"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.events[0].message.text }}",
+        "tableName": "product_chat_histories"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -760,
+        560
+      ],
+      "id": "2e7fb20a-741e-4373-a3cb-b062c9837231",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "62IcG7PBBmwBMPxP",
+          "name": "Postgres Local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "rag_demo",
+        "description": "Call this tool to retrieve information to users.",
+        "topK": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        540
+      ],
+      "id": "fae27ab0-fb60-46b7-828e-3d16de753663",
+      "name": "Answer questions with a vector store1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-exp-03-25",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1020,
+        720
+      ],
+      "id": "d0a046b8-cc8f-439b-a0d5-a31f88d2de05",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-exp-03-25",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        840
+      ],
+      "id": "022bbe87-6b7e-4c16-af45-33e8a1aeccaf",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/text-embedding-004"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        1000
+      ],
+      "id": "476d9e8a-3621-4020-9bbe-22426d7367cb",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IHDYLJF8QLP0DgRN",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "product-shop",
+          "mode": "list",
+          "cachedResultName": "product-shop"
+        },
+        "options": {
+          "pineconeNamespace": "items"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        780
+      ],
+      "id": "c8f2ec8a-31e3-4b7a-b84a-8311d79926b8",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "M8fLFNE1OFwCayPy",
+          "name": "Pinecone API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer questions with a vector store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer questions with a vector store1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Answer questions with a vector store1",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "04014b1e-7ed7-4875-bb07-59b9d693dc79",
+  "triggerCount": 0,
+  "tags": []
+}
