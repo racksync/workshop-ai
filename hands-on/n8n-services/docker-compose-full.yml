@@ -34,7 +34,7 @@ x-n8n: &service-n8n
       - DB_POSTGRESDB_DATABASE=n8n
       - DB_POSTGRESDB_USER=n8n
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD:-n8n}
-      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-"Asia/Bangkok"}
       # N8N Logs
       - N8N_LOG_LEVEL=info # Set the log level to "info"
       - N8N_LOG_OUTPUT=console # Set the log output to "console"
@@ -120,7 +120,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-n8n}
       - POSTGRES_USER=${POSTGRES_USER:-n8n}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-n8n}
-      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-"Asia/Bangkok"}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -138,7 +138,7 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@racksync.com}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}
-      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-"Asia/Bangkok"}
     depends_on:
       - postgres
     ports:
@@ -151,7 +151,7 @@ services:
     container_name: qdrant
     restart: always
     environment:
-      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-"Asia/Bangkok"}
       - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY:-secret-key}
     volumes:
       - ./qdrant_data:/qdrant/storage
@@ -171,7 +171,7 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${ZEROTRUST_TOKEN}
-      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-"Asia/Bangkok"}
     networks:
       - ai-network
     depends_on:
