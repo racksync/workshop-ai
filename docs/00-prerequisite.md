@@ -82,6 +82,7 @@ mindmap
 - เตรียม Access Key และ Secret Key สำหรับ [QDrant](https://qdrant.tech)
 
 ### สำหรับ Picone (หากใช้ในเซสชัน 4 - RAG)
+
 - เตรียม Access Key และ Secret Key สำหรับ [Picone](https://www.pinecone.io)
 
 ### สำหรับ Home Assistant
