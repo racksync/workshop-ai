@@ -133,7 +133,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: n8n-pgadmin
     restart: always
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@racksync.com}
@@ -166,7 +166,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: cloudflared
+    container_name: n8n-cloudflared
     restart: unless-stopped
     command: tunnel run
     environment:
