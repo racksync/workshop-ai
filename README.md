@@ -64,6 +64,7 @@ cd workshop-ai
 - ระบบอัตโนมัติสำหรับบ้านและอาคารอัจฉริยะ
 - การฝึกอบรมและเวิร์คช็อปด้าน IoT
 
+## ติดต่อเรา
 - **โทร**: 08 5880 8885
 - **อีเมล**: info@racksync.com
 - **เว็บไซต์**: https://racksync.com
@@ -71,3 +72,4 @@ cd workshop-ai
 
 © 2007-2025 RACKSYNC CO., LTD. All rights reserved.
 
+    
