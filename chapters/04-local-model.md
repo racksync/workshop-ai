@@ -200,18 +200,17 @@ Ollama represents a significant step forward in democratizing access to large la
 - [Optimizing LLM Performance on Consumer Hardware](https://www.google.com/search?q=optimize+LLM+performance+local+hardware)
 
 ---
-
 ## RACKSYNC CO., LTD.
 
 [RACKSYNC](https://github.com/racksync) เป็นบริษัทที่มีความเชี่ยวชาญในการพัฒนาโซลูชั่นด้าน IoT และระบบอัตโนมัติ เรามุ่งมั่นในการสร้างเทคโนโลยีที่เชื่อมต่อโลกเข้าด้วยกันผ่านระบบ IoT ที่มีประสิทธิภาพและเสถียร
 
 ### บริการของเรา
-
 - การออกแบบและพัฒนาระบบ IoT แบบครบวงจร
 - โซลูชั่นเชื่อมต่อสำหรับอุตสาหกรรม 4.0
 - ระบบอัตโนมัติสำหรับบ้านและอาคารอัจฉริยะ
 - การฝึกอบรมและเวิร์คช็อปด้าน IoT
 
+## ติดต่อเรา
 - **โทร**: 08 5880 8885
 - **อีเมล**: info@racksync.com
 - **เว็บไซต์**: https://racksync.com

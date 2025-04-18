@@ -154,9 +154,11 @@ flowchart LR
 - ระบบอัตโนมัติสำหรับบ้านและอาคารอัจฉริยะ
 - การฝึกอบรมและเวิร์คช็อปด้าน IoT
 
+## ติดต่อเรา
 - **โทร**: 08 5880 8885
 - **อีเมล**: info@racksync.com
 - **เว็บไซต์**: https://racksync.com
 - **Facebook**: https://www.facebook.com/racksync
 
 © 2007-2025 RACKSYNC CO., LTD. All rights reserved.
+

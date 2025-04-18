@@ -159,6 +159,7 @@ flowchart LR
 - [Learn Prompting](https://learnprompting.org/) - แหล่งเรียนรู้เกี่ยวกับ prompt engineering
 - [Coursera - AI For Everyone](https://www.coursera.org/learn/ai-for-everyone) - คอร์สพื้นฐาน AI สำหรับทุกคน
 
+---
 ## RACKSYNC CO., LTD.
 
 [RACKSYNC](https://github.com/racksync) เป็นบริษัทที่มีความเชี่ยวชาญในการพัฒนาโซลูชั่นด้าน IoT และระบบอัตโนมัติ เรามุ่งมั่นในการสร้างเทคโนโลยีที่เชื่อมต่อโลกเข้าด้วยกันผ่านระบบ IoT ที่มีประสิทธิภาพและเสถียร
@@ -169,6 +170,7 @@ flowchart LR
 - ระบบอัตโนมัติสำหรับบ้านและอาคารอัจฉริยะ
 - การฝึกอบรมและเวิร์คช็อปด้าน IoT
 
+## ติดต่อเรา
 - **โทร**: 08 5880 8885
 - **อีเมล**: info@racksync.com
 - **เว็บไซต์**: https://racksync.com
