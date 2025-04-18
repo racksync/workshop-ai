@@ -114,6 +114,24 @@ LLMs มีความสามารถในการให้เหตุผ
 ### Iterative Prompting
 การปรับปรุง Prompt อย่างต่อเนื่องตามผลลัพธ์ที่ได้
 
+```mermaid
+mindmap
+  root((Prompt Engineering))
+    Techniques
+      Role Prompting
+      Zero-shot Prompting
+      Chain of Thought
+      ReAct Framework
+    Optimization
+      Prompt Chaining
+      Prompt Templates
+      Iterative Prompting
+    Evaluation
+      A/B Testing
+      Consistency Check
+      User Feedback
+```
+
 ![Prompt Iteration Process](https://www.google.com/search?q=iterative+prompting+process+flow)
 
 ## แนวทางการทดสอบและประเมินผล Prompt

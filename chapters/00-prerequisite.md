@@ -1,6 +1,5 @@
 # Prerequisites - สิ่งที่ต้องเตรียมก่อนเข้าร่วม Workshop
 
-![AI Workshop Preparation](https://www.google.com/search?q=ai+workshop+preparation&tbm=isch)
 
 การเตรียมความพร้อมก่อนเข้าร่วม Workshop จะช่วยให้คุณได้รับประโยชน์สูงสุดจากการเรียนรู้ และสามารถทำ hands-on exercises ได้อย่างราบรื่น ขอให้เตรียมสิ่งต่อไปนี้ให้พร้อมก่อนวันเริ่ม workshop
 

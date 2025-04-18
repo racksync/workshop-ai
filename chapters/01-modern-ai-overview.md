@@ -1,8 +1,13 @@
 # Modern AI Overview
 
-![AI Overview Landscape](https://www.google.com/search?q=modern+ai+landscape+2023&tbm=isch)
+![Modern AI Overview Header](../assets/images/modern-ai-header.jpg)
+
 
 ## ภาพรวมเทคโนโลยี AI ปัจจุบัน
+
+<div class="text-center">
+  <img src="../assets/images/ai-landscape-2025.png" alt="AI Landscape 2025" width="800" />
+</div>
 
 AI ในปัจจุบันมีการพัฒนาก้าวหน้าอย่างรวดเร็ว โดยเฉพาะในด้าน Natural Language Processing และ Computer Vision ปัจจัยสำคัญที่ทำให้ AI มีความสำคัญ:
 
@@ -11,11 +16,36 @@ AI ในปัจจุบันมีการพัฒนาก้าวห�
 - ข้อมูลมหาศาลสำหรับการฝึกฝนโมเดล
 - การเข้าถึงเทคโนโลยี AI ที่ง่ายขึ้นผ่าน API และเครื่องมือต่างๆ
 
+```mermaid
+mindmap
+  root((ปัจจัยการเติบโตของ AI))
+    (Deep Learning)
+      ::icon(fa fa-brain)
+      [Neural Networks]
+      [Transformer Architecture]
+      [Self-Attention Mechanism]
+    (Computing Power)
+      ::icon(fa fa-microchip)
+      [GPU Acceleration]
+      [TPU Specialized Hardware]
+      [Cloud Computing]
+    (Big Data)
+      ::icon(fa fa-database)
+      [Internet Scale Data]
+      [Structured Data]
+      [Multimodal Content]
+    (Accessibility)
+      ::icon(fa fa-door-open)
+      [Open Source Tools]
+      [Cloud APIs]
+      [No-Code Solutions]
+```
+
 > **Key Takeaway:** เทคโนโลยี AI ในปัจจุบันมีความก้าวหน้าอย่างมาก เนื่องจากการพัฒนาของ Deep Learning, คอมพิวเตอร์ประสิทธิภาพสูง, ข้อมูลขนาดใหญ่ และการเข้าถึงที่ง่ายขึ้น
 
 ## AI ที่โดดเด่นในปัจจุบัน
 
-![Popular AI Tools](https://www.google.com/search?q=chatgpt+midjourney+stable+diffusion+comparison&tbm=isch)
+
 
 ### ChatGPT (OpenAI)
 - โมเดลภาษาที่โต้ตอบแบบมนุษย์
@@ -37,6 +67,49 @@ AI ในปัจจุบันมีการพัฒนาก้าวห�
 ## Generative AI และ LLMs
 
 ![Generative AI Examples](https://www.google.com/search?q=generative+ai+examples&tbm=isch)
+
+```mermaid
+classDiagram
+    class GenerativeAI {
+        +generate(input)
+        +train(data)
+        +evaluate()
+    }
+    
+    class LLM {
+        +textGeneration()
+        +tokenize(text)
+        +embedding(token)
+    }
+    
+    class TextToImage {
+        +generateImage(prompt)
+        +styleTransfer()
+    }
+    
+    class TextToAudio {
+        +generateSpeech(text)
+        +musicGeneration(prompt)
+    }
+    
+    class TextToVideo {
+        +generateClip(description)
+        +animateStillImage()
+    }
+    
+    class CodeGeneration {
+        +completeCode(snippet)
+        +debugCode(code)
+    }
+    
+    GenerativeAI <|-- LLM
+    GenerativeAI <|-- TextToImage
+    GenerativeAI <|-- TextToAudio
+    GenerativeAI <|-- TextToVideo
+    GenerativeAI <|-- CodeGeneration
+    
+    LLM --> CodeGeneration: enables
+```
 
 ### ความเข้าใจเกี่ยวกับ Generative AI
 Generative AI คือระบบที่สร้างเนื้อหาใหม่ได้ ไม่ว่าจะเป็นข้อความ รูปภาพ เสียง หรือวิดีโอ โดยเรียนรู้จากข้อมูลที่มีอยู่ แตกต่างจาก AI แบบดั้งเดิมที่มักจะวิเคราะห์หรือจำแนกข้อมูลเท่านั้น
@@ -73,6 +146,28 @@ flowchart LR
 
 ![AI Business Applications](https://www.google.com/search?q=ai+business+applications+2023&tbm=isch)
 
+```mermaid
+gantt
+    title AI Adoption Timeline by Industry
+    dateFormat  YYYY
+    
+    section ธุรกิจ
+    Customer Service AI    :done, cs, 2018, 2023
+    Content Creation       :active, cc, 2020, 2025
+    Product Design         :pd, 2021, 2026
+    Automated Analytics    :aa, 2022, 2027
+    
+    section การแพทย์
+    Diagnostic AI          :done, da, 2019, 2023
+    Drug Discovery         :active, dd, 2020, 2025
+    Personalized Medicine  :pm, 2022, 2027
+    
+    section การศึกษา
+    Tutoring Systems       :done, ts, 2020, 2023
+    Personalized Learning  :active, pl, 2021, 2025
+    Immersive Education    :ie, 2023, 2028
+```
+
 ### ธุรกิจ
 - **Customer Service** - แชทบอทที่ตอบคำถามลูกค้า
 - **Content Creation** - สร้างเนื้อหาการตลาด บทความ โฆษณา
@@ -87,11 +182,13 @@ flowchart LR
 
 > **Key Takeaway:** AI กำลังเปลี่ยนแปลงภาคธุรกิจและงานวิจัยอย่างมีนัยสำคัญ ช่วยเพิ่มประสิทธิภาพ ลดต้นทุน และเปิดโอกาสใหม่ๆ ในหลากหลายอุตสาหกรรม
 
-## ประโยชน์และข้อควรระวังของ AI
+
 
 ### ประโยชน์ที่จับต้องได้
 
 ![AI Benefits](https://www.google.com/search?q=ai+productivity+benefits&tbm=isch)
+
+
 
 - **เพิ่มประสิทธิภาพการทำงาน** - ช่วยให้ทำงานได้รวดเร็วขึ้น ลดเวลาในงานที่ทำซ้ำๆ
 - **ประหยัดต้นทุน** - ลดค่าใช้จ่ายในกระบวนการที่ทำงานอัตโนมัติได้
@@ -119,6 +216,23 @@ pie
 ## อนาคตของ AI
 
 ![Future of AI](https://www.google.com/search?q=future+of+ai+2030&tbm=isch)
+
+```mermaid
+timeline
+    title อนาคตและการพัฒนาของ AI
+    2023 : Generative AI Revolution
+         : Text, Image, Code Generation Models
+         : Enterprise AI Adoption
+    2025 : Multimodal AI Mainstream
+         : Advanced Agentic AI Systems
+         : AI Specialized Hardware Boom
+    2027 : AI-Human Symbiotic Tools
+         : Quantum AI Applications
+         : Neuro-symbolic AI Systems
+    2030 : General AI Capabilities
+         : Seamless Natural Interfaces
+         : AI-driven Scientific Discovery
+```
 
 ### แนวโน้มสำคัญ
 - **Multimodal AI** - AI ที่ทำงานกับข้อมูลหลายรูปแบบ (ข้อความ, รูปภาพ, เสียง, วิดีโอ)

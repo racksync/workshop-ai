@@ -127,6 +127,55 @@ graph LR
 
 > การใช้ RAG สามารถแก้ปัญหา hallucination และช่วยเพิ่มความน่าเชื่อถือให้กับ AI systems
 
+## องค์ประกอบของระบบ RAG
+
+```mermaid
+mindmap
+  root((RAG System))
+    ::icon(fa fa-brain)
+    (Data Sources)
+      [Document Loaders]
+        PDF
+        Web Pages
+        Databases
+        API Services
+      [Document Processing]
+        Text Extraction
+        Cleaning
+        Metadata Enrichment
+    (Index Creation)
+      [Text Splitters]
+        Fixed Size
+        Semantic
+        Recursive
+        Sliding Window
+      [Embedding Models]
+        OpenAI
+        Sentence Transformers
+        BERT variants
+      [Vector Storage]
+        Chroma
+        FAISS
+        Pinecone
+        Weaviate
+    (Query Processing)
+      [Query Understanding]
+        Intent Detection
+        Query Expansion
+      [Retrieval Methods]
+        Similarity Search
+        Hybrid Search
+        Re-ranking
+    (Response Generation)
+      [Prompt Engineering]
+        Context Integration
+        Few-shot Learning
+      [Output Formatting]
+        Citations
+        References
+        Confidence Scores
+```
+
 ## สรุป
 RAG เป็นเทคนิคที่ช่วยเปลี่ยนโฉม LLMs จากแบบจำลองที่มีความรู้จำกัดให้กลายเป็นระบบที่สามารถเข้าถึงและใช้ข้อมูลจากแหล่งภายนอกได้ ช่วยให้การตอบคำถามมีความแม่นยำ น่าเชื่อถือ และมีแหล่งอ้างอิงที่ชัดเจน ความสำเร็จในการพัฒนาระบบ RAG ขึ้นอยู่กับการเลือกใช้เทคนิคและเครื่องมือที่เหมาะสมในแต่ละขั้นตอน ตั้งแต่การเตรียมข้อมูล ไปจนถึงการค้นหาและสร้างคำตอบ
 
