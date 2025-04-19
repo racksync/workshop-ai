@@ -1,6 +1,6 @@
 # Bonus: Tools & Best Practices
 
-![AI Tools Landscape](https://www.google.com/search?q=ai+tools+ecosystem+landscape&tbm=isch)
+![AI Tools Landscape](prompt: "Create a comprehensive infographic showing the AI tools ecosystem landscape with categories for LLMs, vector databases, orchestration tools, and deployment options. Use a modern tech design style with connected nodes.")
 
 ## AI Development Tools Ecosystem
 
@@ -51,7 +51,7 @@ flowchart LR
 - **pgvector / Milvus**: สำหรับการค้นหา similarity และ vector search
 - **sentence-transformers**: สำหรับสร้าง embeddings คุณภาพสูง
 
-![Vector Database Comparison](https://www.google.com/search?q=vector+database+comparison+chart&tbm=isch)
+![Vector Database Comparison](prompt: "Create a detailed comparison chart of vector databases including Pinecone, Weaviate, Chroma, pgvector, and Milvus. Show performance metrics, features, and use cases in a clean, professional table format with color coding.")
 
 ## Security & Data Privacy
 
@@ -96,7 +96,7 @@ flowchart LR
 - **Performance Metrics**: วัดประสิทธิภาพของโมเดลอย่างสม่ำเสมอ
 - **Explainability Tools**: ใช้ SHAP values, LIME หรือ Integrated Gradients เพื่อเข้าใจการตัดสินใจของโมเดล
 
-![AI Explainability Tools](https://www.google.com/search?q=AI+explainability+tools+visualization&tbm=isch)
+![AI Explainability Tools](prompt: "Create a visual representation of AI explainability tools showing SHAP values, LIME, and Integrated Gradients with example visualizations of how they interpret model decisions. Include colorful graphs and decision paths.")
 
 ## Workflow Design Best Practices
 
@@ -120,7 +120,7 @@ flowchart LR
 - **Environmental Considerations**: คำนึงถึงการใช้พลังงานและ carbon footprint
 - **Human Oversight**: เก็บรักษา human-in-the-loop สำหรับการตัดสินใจที่สำคัญ
 
-![AI Ethics Framework](https://www.google.com/search?q=ethical+AI+framework+diagram&tbm=isch)
+![AI Ethics Framework](prompt: "Create a diagram of an ethical AI framework showing key components: bias detection, transparency, environmental impact, human oversight, privacy, and fairness. Use a clean, professional design with interconnected elements in blue and green tones.")
 
 ## Key Takeaway:
 
