@@ -185,9 +185,11 @@ services:
     environment:
       - MINIO_ROOT_USER=${MINIO_ROOT_USER:-root}
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-secret_password}
-      - MINIO_SERVER_URL=http://host.docker.internal:9000  
-      - MINIO_SCHEME=http 
-      #- MINIO_DEFAULT_BUCKETS=${MINIO_DEFAULT_BUCKETS:-n8n}
+      - MINIO_SERVER_URL=${MINIO_SERVER_URL:-http://host.docker.internal:9000}  
+      - MINIO_ฺBROWSER_REDIRECT_URL=${MINIO_BROWSE_REDIRECT_URL:-http://host.docker.internal:9001}
+      - MINIO_REGION_NAME=${MINIO_REGION_NAME:-us-east-1}
+      - MINIO_SCHEME=${MINIO_SCHEME:-http}
+      - MINIO_DEFAULT_BUCKETS=${MINIO_DEFAULT_BUCKETS:-n8n}
     command: server /data --console-address ":9001"
 
   cloudflared:
