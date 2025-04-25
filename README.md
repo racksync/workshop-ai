@@ -45,7 +45,7 @@ cd workshop-ai
 | **[Session 8: RAG (Retrieval-Augmented Generation)](chapters/08-rag.md)** | • หลักการทำงานของ RAG<br>• Workshop: การใช้ Website เป็น Data Source<br>• Processing: Chunking, Embedding, Vector Database (Chroma)<br>• Similarity Search และ Re-ranking<br>• การประยุกต์ใช้ใน use case ต่าง ๆ |
 | **[Session 9: Advanced Augmentation Methods](chapters/09-advanced-augmentation.md)** | • CAG (Cache-Augmented Generation)<br>• Caching: Context/prompt (OpenAI, Anthropic)<br>• Response/semantic caching |
 | **[Session 10: MCP (Model Context Protocol)](chapters/10-mcp.md)** | • MCP คืออะไรและทำงานอย่างไร<br>• การนำ MCP ไปประยุกต์ใช้ในแอปพลิเคชัน<br>• Workshop: การพัฒนาระบบด้วย MCP<br>• Demo: การทำงานของ MCP ในโปรเจคจริง |
-| **[Session 11: Vibe Coding & Framework](chapters/11-vibe-coding-framework.md)** | • Bolt คืออะไร?<br>• การใช้ Bolt เพื่อพัฒนา Web Application แบบรวดเร็วทั้ง back-end และ front end<br>• แนวทางการ Deploy |
+| **[Session 11: Vibe Coding & Framework](chapters/11-vibe-coding-framework.md)** | • Vibe Coding คืออะไร?<br>• การใช้ Vibe Coding เพื่อพัฒนา Web Application แบบรวดเร็วทั้ง back-end และ front end<br>• แนวทางการ Deploy |
 | **[Bonus: Tools & Best Practices](chapters/tools-and-best-practices.md)** | • แนะนำเครื่องมืออื่น ๆ ที่เกี่ยวข้อง<br>• แนวทางการดูแลโมเดล, Security และ Data Privacy<br>• Best Practices ในการออกแบบ Workflow |
 | **Q&A, Summary & Next Steps** | • ถาม-ตอบ สรุปแนวทางต่อยอดของผู้เรียน<br>• แชร์ Resource & Community สำหรับการพัฒนาต่อ |
 
