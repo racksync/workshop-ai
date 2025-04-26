@@ -14,19 +14,19 @@ tasks:
       - docker compose -f docker-compose-full.yml down
 
   n8n:ollama:
-    desc: Run n8n AI Stack (Ollama only, with profile: cpu)
+    desc: Run n8n AI Stack (Ollama only, with profile = cpu)
     dir: ./hands-on/n8n-services
     cmds:
       - docker compose -f docker-compose-ollama.yml --profile cpu up -d
 
   n8n:ollama:gpu-nvidia:
-    desc: Run n8n AI Stack (Ollama only, with profile: gpu-nvidia)
+    desc: Run n8n AI Stack (Ollama only, with profile = gpu-nvidia)
     dir: ./hands-on/n8n-services
     cmds:
       - docker compose -f docker-compose-ollama.yml --profile gpu-nvidia up -d
 
   n8n:ollama:gpu-amd:
-    desc: Run n8n AI Stack (Ollama only, with profile: gpu-amd)
+    desc: Run n8n AI Stack (Ollama only, with profile = gpu-amd)
     dir: ./hands-on/n8n-services
     cmds:
       - docker compose -f docker-compose-ollama.yml --profile gpu-amd up -d
