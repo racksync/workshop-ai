@@ -1,6 +1,6 @@
-# Session 11: Vibe Coding & Framework
+# Session 11: Vibe Coding & Modern Frameworks (Vercel v0, Lovable, Firebase Studio, Context7)
 
-![Bolt Framework](https://www.google.com/search?q=modern+web+development+framework+visualization&tbm=isch)
+![Modern Web Frameworks](https://www.google.com/search?q=modern+web+development+framework+visualization&tbm=isch)
 
 ## Introduction to Vibe Coding
 
@@ -8,234 +8,200 @@ Vibe Coding เป็นแนวคิดในการพัฒนาซอ�
 
 > **Key Takeaway**: Vibe Coding คือแนวทางการพัฒนาที่เน้นความรวดเร็ว ยืดหยุ่น และมีประสิทธิภาพ เหมาะสำหรับการพัฒนาแอปพลิเคชันยุคใหม่
 
-## Bolt Framework คืออะไร?
+## Modern Frameworks: Vercel v0, Lovable, Firebase Studio, Context7
 
-Bolt เป็น Framework ที่ออกแบบมาเพื่อการพัฒนา Web Application แบบรวดเร็วโดยเฉพาะ สามารถเชื่อมต่อกับระบบ AI และให้ความยืดหยุ่นในการพัฒนาทั้ง Backend และ Frontend ได้อย่างมีประสิทธิภาพ Bolt ถูกสร้างขึ้นมาเพื่อลดความซับซ้อนในการพัฒนา และให้นักพัฒนาสามารถทำงานได้อย่างมีประสิทธิภาพมากขึ้น
+### Vercel v0
+- Framework สำหรับสร้าง UI และ API แบบ serverless ได้อย่างรวดเร็ว
+- รองรับการ deploy อัตโนมัติบน Vercel Platform
+- ใช้แนวคิด AI-assisted UI/Code Generation
+
+### Lovable
+- Full-stack framework ที่เน้น developer experience และ productivity
+- มีระบบ routing, data fetching, และ state management ที่ใช้งานง่าย
+
+### Firebase Studio
+- เครื่องมือสำหรับสร้าง backend, database, authentication, และ hosting แบบ no-code/low-code
+- เหมาะกับ rapid prototyping และ production
+
+### Context7
+- แพลตฟอร์มสำหรับเชื่อมต่อ AI APIs และ function calling
+- ใช้งานง่ายสำหรับการเพิ่ม AI ความสามารถในแอป
 
 ```mermaid
 graph LR
-    A[Bolt Framework] --> B[Backend Development]
-    A --> C[Frontend Development]
-    B --> D[API Services]
-    B --> E[Database Integration]
-    B --> F[Authentication]
-    C --> G[UI Components]
-    C --> H[State Management]
-    C --> I[Responsive Design]
+    A[Vercel v0] --> B[UI Generation]
+    A --> C[API Routes]
+    B --> D[AI-assisted Design]
+    C --> E[Serverless Functions]
+    F[Lovable] --> G[Full-stack Routing]
+    F --> H[Data Fetching]
+    I[Firebase Studio] --> J[Database]
+    I --> K[Authentication]
+    I --> L[Hosting]
+    M[Context7] --> N[AI APIs]
+    M --> O[Function Calling]
 ```
 
-> **Key Takeaway**: Bolt Framework ช่วยให้นักพัฒนาสามารถสร้างแอปพลิเคชันแบบ full-stack ได้อย่างรวดเร็วโดยไม่จำเป็นต้องกังวลกับ boilerplate code มากเกินไป
+> **Key Takeaway**: Frameworks ยุคใหม่ช่วยให้การพัฒนาแอปพลิเคชันเป็นไปอย่างรวดเร็วและง่ายดาย พร้อมรองรับ AI และ Cloud-native โดยไม่ต้องเขียนโค้ดซ้ำซ้อน
 
-## โครงสร้างและหลักการทำงานของ Bolt
+## โครงสร้างและหลักการทำงานของ Vercel v0, Lovable, Firebase Studio, Context7
 
-Bolt มีโครงสร้างที่เรียบง่าย แต่มีประสิทธิภาพสูง โดยแบ่งออกเป็นส่วนหลักๆ ดังนี้:
+- **Vercel v0**: สร้าง UI/Component/Route ได้จาก natural language prompt และ deploy ได้ทันที
+- **Lovable**: Full-stack framework ที่เน้น DX (Developer Experience) และ productivity
+- **Firebase Studio**: สร้าง backend, database, auth, hosting ได้แบบ visual
+- **Context7**: เชื่อมต่อ AI APIs และ function calling ได้ง่าย
 
-- **Core Module**: ส่วนกลางที่จัดการกับการทำงานพื้นฐานของระบบ
-- **API Module**: จัดการกับการเชื่อมต่อและให้บริการข้อมูลผ่าน API
-- **UI Module**: จัดการกับการแสดงผลและการโต้ตอบกับผู้ใช้
-- **Database Module**: จัดการกับการเชื่อมต่อและการทำงานกับฐานข้อมูล
-- **Authentication Module**: จัดการกับระบบยืนยันตัวตนและการกำหนดสิทธิ์
+![Modern Framework Architecture](https://www.google.com/search?q=modern+web+framework+architecture+diagram&tbm=isch)
 
-![Bolt Framework Architecture](https://www.google.com/search?q=modern+web+framework+architecture+diagram&tbm=isch)
+## การใช้งาน Frameworks เหล่านี้เพื่อพัฒนา Web Application
 
-## การใช้งาน Bolt เพื่อพัฒนา Web Application
-
-### การติดตั้งและเริ่มต้น
+### การติดตั้งและเริ่มต้น (Vercel v0)
 
 ```bash
-# ติดตั้ง Bolt CLI
-npm install -g @bolt/cli
+# ติดตั้ง Vercel CLI
+npm install -g vercel
 
-# สร้างโปรเจคใหม่
-bolt new my-awesome-app
-
-# เข้าไปที่โปรเจค
-cd my-awesome-app
+# สร้างโปรเจคใหม่ด้วย v0
+npx v0 init my-v0-app
+cd my-v0-app
 
 # รันโปรเจคในโหมด development
-bolt dev
+vercel dev
 ```
 
-### การพัฒนา Backend
+### การพัฒนา Backend (Lovable, Firebase Studio)
 
-Bolt ช่วยให้การพัฒนา Backend เป็นเรื่องง่าย โดยมีระบบ Auto-generation สำหรับ API endpoints และการเชื่อมต่อกับฐานข้อมูล นอกจากนี้ยังมีเครื่องมือสำหรับการจัดการ Authentication และ Authorization อย่างมีประสิทธิภาพ
+#### Lovable Example
+```ts
+// lovable/src/routes/api/users.ts
+import { defineRoute } from 'lovable';
 
-```javascript
-// ตัวอย่างการสร้าง API ใน Bolt
-bolt.api('/users', {
-  get: async (req, res) => {
-    const users = await db.users.findAll();
-    return users;
+export default defineRoute({
+  async GET(req) {
+    // ดึงข้อมูลจาก database
+    return Response.json(await db.user.findMany());
   },
-  post: async (req, res) => {
-    const newUser = await db.users.create(req.body);
-    return newUser;
+  async POST(req) {
+    const data = await req.json();
+    return Response.json(await db.user.create({ data }));
   }
 });
 ```
 
-> **Key Takeaway**: Bolt ทำให้การสร้าง backend API เป็นเรื่องง่าย ด้วยไวยากรณ์ที่เรียบง่ายและมีประสิทธิภาพ
+#### Firebase Studio Example
+- ใช้ UI สร้าง Firestore Database, Auth, และ API Endpoint ได้ทันที
+- สามารถ export code หรือเชื่อมต่อผ่าน SDK
 
-### การพัฒนา Frontend
+### การพัฒนา Frontend (Vercel v0, Lovable)
 
-Bolt มาพร้อมกับ UI Component Library ที่ครบครัน ช่วยให้การพัฒนา Frontend เป็นไปอย่างรวดเร็ว และยังรองรับ Modern Frontend Framework เช่น React, Vue หรือ Angular อีกด้วย
+#### Vercel v0 Example
+```ts
+// v0/app/page.tsx
+import { Button } from 'v0/ui';
 
-```javascript
-// ตัวอย่างการสร้าง UI Component ใน Bolt
-import { Component } from '@bolt/ui';
-
-class UserList extends Component {
-  render() {
-    return (
-      <div>
-        {this.state.users.map(user => (
-          <UserCard key={user.id} user={user} />
-        ))}
-      </div>
-    );
-  }
+export default function Home() {
+  return (
+    <main>
+      <h1>Hello Vercel v0</h1>
+      <Button>Click me</Button>
+    </main>
+  );
 }
 ```
 
-```mermaid
-graph LR
-    A[UI Components] --> B[Forms]
-    A --> C[Tables]
-    A --> D[Charts]
-    A --> E[Navigation]
-    A --> F[Modals]
-    A --> G[Notifications]
+#### Lovable Example
+```ts
+// lovable/src/components/UserList.tsx
+import { useQuery } from 'lovable';
+
+export function UserList() {
+  const { data: users } = useQuery('/api/users');
+  return (
+    <ul>
+      {users?.map(u => <li key={u.id}>{u.name}</li>)}
+    </ul>
+  );
+}
 ```
 
-## การเชื่อมต่อ Bolt กับ AI
+## การ Deploy Application
 
-Bolt สามารถเชื่อมต่อกับ AI APIs เช่น OpenAI, Gemini และอื่นๆ ได้อย่างง่ายดาย ช่วยให้นักพัฒนาสามารถสร้างแอปพลิเคชันที่ใช้ประโยชน์จาก AI ได้อย่างเต็มที่
-
-```javascript
-// ตัวอย่างการเชื่อมต่อ Bolt กับ OpenAI
-bolt.ai.connect('openai', {
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-// การใช้งาน AI ใน API
-bolt.api('/generate-content', {
-  post: async (req, res) => {
-    const { prompt } = req.body;
-    const content = await bolt.ai.generate(prompt);
-    return { content };
-  }
-});
-```
-
-![AI Integration](https://www.google.com/search?q=AI+integration+in+web+frameworks&tbm=isch)
-
-> **Key Takeaway**: Bolt มีระบบเชื่อมต่อกับ AI APIs ที่ใช้งานง่าย ทำให้การสร้างแอปพลิเคชันที่ใช้ประโยชน์จาก AI เป็นเรื่องที่เป็นไปได้สำหรับนักพัฒนาทุกระดับ
-
-## การ Deploy Bolt Application
-
-Bolt รองรับการ Deploy ได้หลากหลายรูปแบบ ทั้ง Traditional Hosting, Container (Docker) และ Cloud Services ต่างๆ
-
-```mermaid
-graph LR
-    A[Bolt Application] --> B[Traditional Hosting]
-    A --> C[Docker Container]
-    A --> D[Kubernetes]
-    A --> E[Serverless]
-    C --> F[Docker Hub]
-    C --> G[Amazon ECR]
-    D --> H[GCP GKE]
-    D --> I[AWS EKS]
-    D --> J[Azure AKS]
-    E --> K[AWS Lambda]
-    E --> L[GCP Cloud Functions]
-    E --> M[Azure Functions]
-```
-
-### ขั้นตอนการ Deploy บน Cloud Provider
+- **Vercel v0/Lovable**: deploy ขึ้น Vercel ได้ทันที (CI/CD อัตโนมัติ)
+- **Firebase Studio**: deploy backend/frontend/database/auth ได้ในคลิกเดียว
 
 ```bash
-# Build สำหรับ production
-bolt build
+# Deploy ขึ้น Vercel
+vercel --prod
 
-# Deploy ไปยัง Cloud Provider
-bolt deploy --target aws
+# หรือ deploy ผ่าน Firebase Studio UI
 ```
 
-> **Key Takeaway**: Bolt มีระบบ deployment ที่ยืดหยุ่นและรองรับหลากหลายแพลตฟอร์ม ทำให้การนำแอปพลิเคชันขึ้น production เป็นเรื่องง่าย
+```mermaid
+graph LR
+    A[Modern App] --> B[Vercel Hosting]
+    A --> C[Firebase Hosting]
+    A --> D[Serverless Functions]
+    A --> E[Edge Functions]
+```
 
-## Use Cases ของ Bolt
+> **Key Takeaway**: Frameworks เหล่านี้รองรับการ deploy แบบ cloud-native และ serverless ได้ทันที
 
-- **Startups**: เหมาะสำหรับ startups ที่ต้องการพัฒนาแอปพลิเคชันอย่างรวดเร็ว
-- **Enterprise**: เหมาะสำหรับองค์กรที่ต้องการสร้าง internal tools หรือ customer-facing applications
-- **AI-powered Applications**: เหมาะสำหรับการสร้างแอปพลิเคชันที่ใช้ประโยชน์จาก AI
-- **E-commerce**: สามารถสร้างระบบ e-commerce ได้อย่างรวดเร็ว
-- **Dashboard & Analytics**: เหมาะสำหรับการสร้างระบบ dashboard และ analytics
+## Use Cases ของ Vercel v0, Lovable, Firebase Studio, Context7
 
-![Bolt Use Cases](https://www.google.com/search?q=web+application+use+cases&tbm=isch)
+- **AI-powered Applications**: ใช้ Context7 เชื่อมต่อ AI APIs ได้ทันที
+- **Rapid Prototyping**: ใช้ Vercel v0/Firebase Studio สร้าง prototype ได้เร็ว
+- **Full-stack Web Apps**: Lovable รองรับทั้ง frontend/backend ในที่เดียว
+- **Internal Tools & Dashboard**: สร้าง dashboard ด้วย Vercel v0 + Firebase Studio
+- **E-commerce & SaaS**: รองรับ scale และ auth ได้ง่าย
 
-## Workshop: สร้าง AI Dashboard ด้วย Bolt
+![Modern App Use Cases](https://www.google.com/search?q=web+application+use+cases&tbm=isch)
 
-ในส่วนนี้เราจะทดลองสร้าง AI Dashboard ง่ายๆ ด้วย Bolt Framework ซึ่งจะมีความสามารถในการวิเคราะห์ข้อมูลและแสดงผลในรูปแบบต่างๆ
+## Workshop: สร้าง AI Dashboard ด้วย Vercel v0 + Context7 + Firebase Studio
 
 1. **เตรียมโปรเจค**:
    ```bash
-   bolt new ai-dashboard
+   npx v0 init ai-dashboard
    cd ai-dashboard
    ```
-
-2. **เพิ่ม AI Module**:
-   ```bash
-   bolt add module ai
-   ```
-
-3. **สร้าง API สำหรับวิเคราะห์ข้อมูล**:
-   ```javascript
-   bolt.api('/analyze', {
-     post: async (req, res) => {
-       const { data } = req.body;
-       const analysis = await bolt.ai.analyze(data);
-       return analysis;
-     }
-   });
-   ```
-
-4. **สร้าง Dashboard UI**:
-   ```javascript
-   import { Dashboard, Chart, Card } from '@bolt/ui';
-   
-   function AIDashboard() {
-     const [data, setData] = useState(null);
-     
-     useEffect(() => {
-       // Fetch data
-       fetchData().then(setData);
-     }, []);
-     
+2. **เชื่อมต่อ Firebase Studio** (สร้าง database/auth ผ่าน UI)
+3. **เพิ่ม Context7 สำหรับ AI**
+   ```ts
+   // src/app/ai-dashboard/page.tsx
+   import { useContext7 } from 'context7';
+   export default function AIDashboard() {
+     const { callAI, result, loading } = useContext7('openai/gpt-4');
      return (
-       <Dashboard>
-         <Card title="AI Analysis">
-           {data ? (
-             <Chart type="bar" data={data.chartData} />
-           ) : (
-             <Loading />
-           )}
-         </Card>
-       </Dashboard>
+       <div>
+         <button onClick={() => callAI({ prompt: 'วิเคราะห์ข้อมูลยอดขาย' })}>
+           วิเคราะห์ด้วย AI
+         </button>
+         {loading ? 'กำลังวิเคราะห์...' : result?.content}
+       </div>
      );
+   }
+   ```
+4. **สร้าง Dashboard UI ด้วย v0**
+   ```ts
+   // src/app/ai-dashboard/components/Chart.tsx
+   import { Chart } from 'v0/ui';
+   export function SalesChart({ data }) {
+     return <Chart type="bar" data={data} />;
    }
    ```
 
 ## สรุป
 
-Bolt Framework เป็นเครื่องมือที่มีประสิทธิภาพสำหรับการพัฒนา Web Application แบบรวดเร็ว โดยเน้นแนวคิด Vibe Coding ที่ให้ความสำคัญกับประสบการณ์การพัฒนาที่ราบรื่นและมีประสิทธิภาพ Bolt รองรับการพัฒนาทั้ง Backend และ Frontend และมีความสามารถในการเชื่อมต่อกับ AI APIs ได้อย่างง่ายดาย นอกจากนี้ยังมีระบบ Deployment ที่ยืดหยุ่น ทำให้การนำแอปพลิเคชันขึ้น Production เป็นเรื่องง่าย
+Frameworks ยุคใหม่อย่าง Vercel v0, Lovable, Firebase Studio, Context7 ช่วยให้การพัฒนาแอปพลิเคชันเป็นไปอย่างรวดเร็ว สนุก และรองรับ AI/Cloud-native เต็มรูปแบบ เหมาะกับทั้ง rapid prototyping และ production
 
-> **Key Takeaway**: Bolt Framework ช่วยลดเวลาและความซับซ้อนในการพัฒนา Web Application โดยไม่ลดทอนคุณภาพและประสิทธิภาพของแอปพลิเคชัน เหมาะสำหรับนักพัฒนาที่ต้องการสร้างแอปพลิเคชันคุณภาพสูงในเวลาอันรวดเร็ว
+> **Key Takeaway**: Modern frameworks ลดเวลาและความซับซ้อนในการพัฒนาแอปพลิเคชัน รองรับ AI และ Cloud-native ได้ทันที
 
 ## แหล่งข้อมูลเพิ่มเติม
 
-- [Bolt Framework Official Documentation](https://boltframework.dev/docs)
+- [Vercel v0](https://v0.dev)
+- [Lovable](https://lovable.dev)
+- [Firebase Studio](https://firebase.google.com/products/extensions/studio)
+- [Context7](https://context7.com)
 - [Vibe Coding: A Modern Approach to Web Development](https://medium.com/web-development/vibe-coding-approach)
-- [Building AI-powered Applications with Modern Frameworks](https://dev.to/ai-applications)
 - [Deployment Strategies for Modern Web Applications](https://www.netlify.com/blog/deployment-strategies)
 
 ---

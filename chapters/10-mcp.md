@@ -155,18 +155,99 @@ class MCPHandler {
 **Key Takeaway:**
 > การนำ MCP ไปใช้ในโปรเจคจริงต้องคำนึงถึงการจัดการประวัติการสนทนา การสร้างบริบทที่เหมาะสม และการประมวลผลข้อมูลก่อนและหลังการใช้งานโมเดล AI
 
-## สรุป
+## ตัวอย่าง MCP Server (REST API)
 
-Model Context Protocol (MCP) เป็นแนวทางที่ช่วยยกระดับการทำงานของระบบ AI โดยการจัดการบริบทและการสื่อสารระหว่างแอปพลิเคชันและโมเดล AI ได้อย่างมีประสิทธิภาพ การนำ MCP มาใช้ช่วยให้ระบบสามารถให้คำตอบที่แม่นยำและสอดคล้องกับบริบทมากขึ้น ทำให้ประสบการณ์การใช้งาน AI มีความเป็นธรรมชาติและน่าเชื่อถือยิ่งขึ้น
+ตัวอย่างนี้แสดงการสร้าง MCP Server ด้วย Python (Flask) ที่รับ context และ query จาก client แล้วตอบกลับผลลัพธ์ที่ได้จากโมเดล AI หรือฟังก์ชันจำลอง:
 
-นอกจากนี้ MCP ยังเป็นพื้นฐานสำคัญในการพัฒนาระบบ AI ที่ซับซ้อนและมีความสามารถสูง เช่น ระบบช่วยตัดสินใจ ระบบสร้างเนื้อหา และ Chatbot ที่มีความเฉพาะทาง ผู้พัฒนาที่เข้าใจและนำ MCP มาใช้จะสามารถสร้างโซลูชัน AI ที่มีประสิทธิภาพและตอบโจทย์ความต้องการของผู้ใช้ได้อย่างตรงจุด
+```python
+from flask import Flask, request, jsonify
+app = Flask(__name__)
 
-## แหล่งข้อมูลเพิ่มเติม
+def process_with_model(context, query):
+    # ตัวอย่าง: รวม context กับ query แล้วตอบกลับ (แทนที่ด้วยโมเดลจริงได้)
+    return f"[CTX: {context}] {query} => ตอบกลับจากโมเดล AI"
 
-- [OpenAI Documentation on API Protocols](https://platform.openai.com/docs)
-- [Hugging Face Documentation](https://huggingface.co/docs)
-- [Model Context Management Best Practices](https://www.google.com/search?q=model+context+management+best+practices)
-- [Understanding Context Windows in LLMs](https://www.google.com/search?q=understanding+context+windows+in+llms)
+@app.route('/mcp', methods=['POST'])
+def mcp_server():
+    data = request.json
+    context = data.get('context', '')
+    query = data.get('query', '')
+    result = process_with_model(context, query)
+    return jsonify({'result': result})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+- สามารถนำไปต่อยอดให้เชื่อมต่อกับโมเดล AI จริง เช่น OpenAI, Hugging Face หรือ LLM อื่นๆ ได้
+- รองรับการรับ context/query จาก client และตอบกลับในรูปแบบ JSON
+
+## แหล่งสืบค้นและตัวอย่างการใช้งาน MCP ขั้นสูง
+
+### Streamable HTTP ใน MCP
+
+MCP สมัยใหม่รองรับการสื่อสารแบบ Streamable HTTP (เช่น HTTP/1.1 chunked, HTTP/2 streaming, Server-Sent Events หรือ WebSocket) เพื่อให้โมเดล AI สามารถส่งผลลัพธ์ทีละส่วน (stream) กลับไปยัง client ได้ทันทีที่ประมวลผลเสร็จแต่ละช่วง เช่น การตอบข้อความแบบ real-time หรือการสตรีมข้อมูลขนาดใหญ่
+
+**ตัวอย่างการใช้งาน (Node.js/Express + OpenAI API):**
+
+```javascript
+app.post('/mcp/stream', async (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.flushHeaders();
+
+  const openaiStream = openai.createChatCompletionStream({
+    model: 'gpt-4',
+    messages: req.body.messages,
+    stream: true
+  });
+
+  for await (const chunk of openaiStream) {
+    res.write(`data: ${JSON.stringify(chunk)}\n\n`);
+  }
+  res.end();
+});
+```
+
+---
+
+### ตัวอย่างการตั้งค่า MCP Host และ MCP Client
+
+**MCP Host (Python Flask):**
+```python
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+
+@app.route('/mcp', methods=['POST'])
+def mcp_host():
+    data = request.json
+    # ประมวลผล context และ query
+    response = process_with_model(data['context'], data['query'])
+    return jsonify({'result': response})
+
+app.run(host='0.0.0.0', port=5000)
+```
+
+**MCP Client (Node.js):**
+```javascript
+const axios = require('axios');
+async function askMCP(query, context) {
+  const res = await axios.post('http://localhost:5000/mcp', {
+    query,
+    context
+  });
+  return res.data.result;
+}
+```
+
+---
+
+### แหล่งสืบค้น MCP และ Streamable HTTP
+- [Model Context Protocol (MCP) Spec](https://github.com/modelcontext/protocol)
+- [OpenAI API Streaming](https://platform.openai.com/docs/guides/text-generation/streaming)
+- [Hugging Face Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index)
+- [Server-Sent Events (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
+- [HTTP Streaming Patterns](https://cloud.google.com/architecture/http-streaming-patterns)
 
 ## RACKSYNC CO., LTD.
 
