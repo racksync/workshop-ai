@@ -23,6 +23,7 @@ x-n8n: &service-n8n
       - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - N8N_EDITOR_BASE_URL=${N8N_PROTOCOL:-http}://${N8N_HOST:-localhost}:${N8N_PORT:-5678}
       - NODE_ENV=development # Set to "production" or "development"
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-your-secret-key}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true # Prevents the settings file from being world-readable
