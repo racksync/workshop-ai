@@ -49,8 +49,6 @@ x-n8n: &service-n8n
       - N8N_LOG_FILE_ROTATE=true # Enable log file rotation
       - N8N_LOG_FILE_ROTATE_INTERVAL=1d # Set the log file rotation interval
       - OLLAMA_HOST=host.docker.internal:11434
-  env_file:
-    - .env
 
 services:
   n8n-import:
