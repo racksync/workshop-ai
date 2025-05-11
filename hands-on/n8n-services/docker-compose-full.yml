@@ -84,9 +84,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      n8n-import:
-        condition: service_completed_successfully
-    #   - qdrant
+      # n8n-import:
+      #   condition: service_completed_successfully
+      #   - qdrant
 
 
   postgres:
@@ -203,6 +203,6 @@ services:
       - TZ=${GENERIC_TIMEZONE:-UTC}
     networks:
       - ai-network
-    depends_on:
-      - n8n
+    # depends_on:
+    #   - n8n
       
