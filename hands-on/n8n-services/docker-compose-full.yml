@@ -1,6 +1,7 @@
 volumes:
   n8n_data:
   postgres_data:
+  pgvector_data:
   qdrant_data:
   redis_data:
   redisinsight_data:
