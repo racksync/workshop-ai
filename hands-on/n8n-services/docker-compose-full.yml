@@ -1,10 +1,10 @@
 volumes:
-  #n8n_data:
+  n8n_data:
   postgres_data:
-  #qdrant_data:
+  qdrant_data:
   redis_data:
   redisinsight_data:
-  #minio_data:
+  minio_data:
 
 networks:
   ai-network:
@@ -90,7 +90,7 @@ services:
 
 
   postgres:
-    image: postgres:16-alpine
+    image: pgvector/pgvector:pg16
     container_name: n8n-postgres
     restart: always
     environment:
@@ -100,7 +100,8 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - TZ=${GENERIC_TIMEZONE:-UTC}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
     networks:
       - ai-network
     healthcheck:
