@@ -31,6 +31,7 @@ x-n8n: &service-n8n
       - N8N_SECURE_COOKIE=false # Disable Prevents the use of cookies over HTTPs
       - N8N_USER_MANAGEMENT_JWT_SECRET=${N8N_USER_MANAGEMENT_JWT_SECRET:-secret-key}
       - N8N_RUNNERS_ENABLED=true # Enable additional runners
+      - N8N_RUNNERS_MODE=internal # Set the runners mode to "internal"
       - N8N_PERSONALIZATION=false # Disable personalization
       - WEBHOOK_URL=${N8N_WEBHOOK_URL} # The public URL of the n8n instance
       - DB_TYPE=postgresdb 
